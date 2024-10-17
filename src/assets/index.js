@@ -1,0 +1,1 @@
+export { default as login } from '/assets/images/login.png';

@@ -1,0 +1,1 @@
+export const SyncLoader = require('../assets/SyncLoader.json');
