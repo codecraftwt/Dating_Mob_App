@@ -17,39 +17,79 @@ import {lightTheme} from '../../assets/themes';
 import RoundButton from '../../components/Common/RoundButton';
 import Input from '../../components/Common/Input';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useDispatch, useSelector} from 'react-redux';
+import {loginUser} from '../../Redux/slices/UserSlice';
+import Toast from 'react-native-toast-message';
 
 const {height, width} = Dimensions.get('window');
 
 const LoginScreen = ({navigation}) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  const isLoading = useSelector(state => state?.user?.isLoading);
+  const [email, setEmail] = useState('trupti02@yopmail.com');
+  const [password, setPassword] = useState('Trupti@123');
+  const [errors, setErrors] = useState({
+    email: '',
+    password: '',
+  });
   const [secureTextEntry, setSecureTextEntry] = useState(true);
+
+  const validate = () => {
+    const errors = {
+      email: '',
+      password: '',
+    };
+    if (email === '') {
+      errors.email = 'Please Enter Email';
+    } else if (!validateEmail(email)) {
+      errors.email = 'Please Enter Valid Email';
+    }
+    if (password === '') {
+      errors.password = 'Please Enter Password';
+    } else if (password.length < 4) {
+      errors.password = 'Please Enter Valid Password';
+    }
+    return errors;
+  };
+
+  const validateEmail = email => {
+    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleLogin = () => {
+    const validationErrors = validate();
+    console.log('akashhhhhh');
+
+    if (validationErrors.email === '' && validationErrors.password === '') {
+      const payload = {
+        email: email,
+        password: password,
+        // mac_id: deviceId,
+        // source: "app"
+      };
+
+      dispatch(loginUser({payload})).then(action => {
+        if (action.payload.status) {
+          Toast.show({
+            type: 'success',
+            text1: 'Login Successful',
+            position: 'bottom',
+          });
+          navigation.navigate('bottomtabbar');
+        }
+      });
+    } else {
+      setErrors(validationErrors);
+    }
+  };
 
   const handleNavigation = () => {
     navigation.navigate('Gender');
   };
-  const handleNavigationToLogin = () => {
-    navigation.navigate('ForgetPass');
-  };
-
-  const toggleSecureEntry = () => {
-    setSecureTextEntry(!secureTextEntry);
-  };
-
-  const submitLogin = () => {
-    // Handle login submission
-  };
-
-  const onChangeUsername = () => {
-    console.log('onChangeUsername');
-  };
-
-  const onChangePassword = () => {
-    console.log('onChangePassword');
-  };
 
   const backButton = () => {
-    console.log('backButton');
+    navigation.navigate('LoginSelect');
   };
 
   return (
@@ -85,23 +125,28 @@ const LoginScreen = ({navigation}) => {
           <Text style={styles.signInText}>Login Account</Text>
           <Input
             placeholder={'Username'}
-            onChangeText={onChangeUsername}
-            // value={username}
+            onChangeText={text => setEmail(text)}
+            value={email}
             // errors={errors.username}
             icon="user"
             choose={true}
           />
+          {errors.email !== '' && (
+            <Text style={styles.errorText}>{errors.email}</Text>
+          )}
           <Input
             placeholder={'Password'}
-            onChangeText={onChangePassword}
-            // value={password}
+            onChangeText={text => setPassword(text)}
+            value={password}
             // errors={errors.password}
             secureTextEntry={true}
             icon="key"
             choose={true}
             iconStyle={{transform: [{rotate: '80deg'}]}}
           />
-
+          {errors.password !== '' && (
+            <Text style={styles.errorText}>{errors.password}</Text>
+          )}
           <TouchableOpacity style={styles.forgetContainer}>
             <Text style={styles.forgetStyle} styleKey="appColor">
               Forget Password
@@ -113,7 +158,7 @@ const LoginScreen = ({navigation}) => {
               label={'Login'}
               buttonColor={lightTheme.appColor}
               labelStyle={lightTheme.highlightTextColor}
-              onPress={handleNavigationToLogin}
+              onPress={handleLogin}
             />
           </View>
           <View>
@@ -259,7 +304,7 @@ const styles = StyleSheet.create({
   textStyle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color:lightTheme.highlightTextColor
+    color: lightTheme.highlightTextColor,
   },
   imageContainer: {
     marginTop: 80,
@@ -269,5 +314,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 150,
     height: 150,
+  },
+  errorText: {
+    color: 'red',
   },
 });
