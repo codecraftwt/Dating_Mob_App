@@ -62,21 +62,24 @@ const LoginScreen = ({navigation}) => {
     console.log('akashhhhhh');
 
     if (validationErrors.email === '' && validationErrors.password === '') {
-      const payload = {
+      console.log(email,'email')
+      console.log(password,'password')
+      const data = {
         email: email,
         password: password,
         // mac_id: deviceId,
         // source: "app"
       };
 
-      dispatch(loginUser({payload})).then(action => {
-        if (action.payload.status) {
+      dispatch(loginUser({data})).then(({payload})=>{
+        console.log(payload.status,'payload.status')
+        if (payload.status === 200) {
           Toast.show({
             type: 'success',
             text1: 'Login Successful',
             position: 'bottom',
           });
-          navigation.navigate('bottomtabbar');
+          navigation.navigate('Gender');
         }
       });
     } else {

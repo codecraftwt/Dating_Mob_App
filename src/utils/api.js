@@ -1,1 +1,1 @@
-export const baseURL = 'http://localhost:4000/api/auth/';    
+export const baseURL = 'https://backend-dating-gamma.vercel.app/api/auth/';    
