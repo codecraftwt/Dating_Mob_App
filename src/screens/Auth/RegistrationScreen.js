@@ -42,7 +42,7 @@ const RegistrationScreen = ({navigation}) => {
   };
 
   const backButton = () => {
-    navigation.navigate('LoginSelect');
+    navigation.navigate('ReligionData');
   };
 
   return (

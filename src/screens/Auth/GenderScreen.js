@@ -7,26 +7,34 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {StyleSheet} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {lightTheme} from '../../assets/themes';
-import {Chip} from 'react-native-elements';
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome'; // Renamed import
-
+import Chips from '../../components/Common/Chip';
 const {height, width} = Dimensions.get('window');
 
 const GenderScreen = ({navigation}) => {
+  const [selectedChip, setSelectedChip] = useState(null);
+
   const backButton = () => {
-    navigation.navigate('Login');
+    navigation.navigate('LoginSelect');
   };
 
   const onPress = () => {
     navigation.navigate('NameData');
   };
+
+  const handleChipPress = chipTitle => {
+    setSelectedChip(chipTitle);
+  };
+
+  useEffect(() => {
+    // You can add any effect here if needed based on selectedChip
+  }, [selectedChip]);
 
   return (
     <>
@@ -48,112 +56,78 @@ const GenderScreen = ({navigation}) => {
               <Text style={styles.textStyle}>Back</Text>
             </View>
           </TouchableOpacity>
-          {/* <View style={[styles.topContainer, styles.nexStyle]}>
-            <Text style={[styles.textStyle, styles.specialText]}>Gender</Text>
-          </View>
+
           <View style={styles.childContainer}>
-            <Text
-              style={[styles.forgotPassword, {color: '#ffffff'}]}
-              styleKey="highlightTextColor">
-              Select Your Gender
+            <Text style={[styles.forgotPassword, {color: '#000'}]}>
+              This Profile is for
             </Text>
-          </View> */}
-          <View style={styles.chipBox}>
-            <Chip
-              title="My Self"
-              icon={{
-                name: 'bluetooth',
-                type: 'font-awesome',
-                size: 20,
-                color: 'white',
-              }}
-              containerStyle={{width: 150}} // Corrected width style
-            />
-            <Chip
-              title="My Son"
-              icon={{
-                name: 'bluetooth',
-                type: 'font-awesome',
-                size: 20,
-                color: 'white',
-              }}
-            />
           </View>
-          <View style={styles.chipBox}>
-            <Chip
-              title="My Daughter"
-              icon={{
-                name: 'bluetooth',
-                type: 'font-awesome',
-                size: 20,
-                color: 'white',
-              }}
-            />
-            <Chip
-              title="My Sister"
-              icon={{
-                name: 'bluetooth',
-                type: 'font-awesome',
-                size: 20,
-                color: 'white',
-              }}
-            />
-          </View>
-          <View style={styles.chipBox}>
-            <Chip
-              title="My Brother"
-              icon={{
-                name: 'bluetooth',
-                type: 'font-awesome',
-                size: 20,
-                color: 'white',
-              }}
-            />
-            <Chip
-              title="My Relative"
-              icon={{
-                name: 'bluetooth',
-                type: 'font-awesome',
-                size: 20,
-                color: 'white',
-              }}
-            />
-          </View>
-        </ImageBackground>
-        <View style={styles.bottomContainer}>
-          <View style={styles.bottomContent}>
-            <View style={styles.childContainer}>
-              <TouchableOpacity>
-                <View
-                  style={[styles.iconContainer, {backgroundColor: 'purple'}]}>
-                  <MaterialIcon
-                    name="gender-male"
-                    size={50}
-                    // color={theme.highlightTextColor}
-                    style={styles.Icon}
-                  />
-                </View>
-                <Text style={styles.genderStyle} styleKey="textColor">
-                  Male
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <View
-                  style={[styles.iconContainer, {backgroundColor: '#e3384c'}]}>
-                  <MaterialIcon
-                    name="gender-female"
-                    size={50}
-                    // color={theme.highlightTextColor}
-                    style={styles.Icon}
-                  />
-                </View>
-                <Text style={styles.genderStyle} styleKey="textColor">
-                  Female
-                </Text>
-              </TouchableOpacity>
+          <View>
+            <View style={styles.chipBox}>
+              <Chips
+                title="My Self"
+                onPress={() => handleChipPress('My Self')}
+              />
+              <Chips title="My Son" onPress={() => handleChipPress('My Son')} />
+            </View>
+            <View style={styles.chipBox}>
+              <Chips
+                title="My Daughter"
+                onPress={() => handleChipPress('My Daughter')}
+              />
+              <Chips
+                title="My Sister"
+                onPress={() => handleChipPress('My Sister')}
+              />
+            </View>
+            <View style={styles.chipBox}>
+              <Chips
+                title="My Brother"
+                onPress={() => handleChipPress('My Brother')}
+              />
+              <Chips
+                title="My Relative"
+                onPress={() => handleChipPress('My Relative')}
+              />
             </View>
           </View>
-        </View>
+        </ImageBackground>
+
+        {(selectedChip === 'My Self' || selectedChip === 'My Relative') && (
+          <View style={styles.bottomContainer}>
+            <View style={styles.bottomContent}>
+              <View style={styles.childContainer}>
+                <TouchableOpacity>
+                  <View
+                    style={[styles.iconContainer, {backgroundColor: 'purple'}]}>
+                    <MaterialIcon
+                      name="gender-male"
+                      size={50}
+                      style={styles.Icon}
+                    />
+                  </View>
+                  <Text style={styles.genderStyle}>Male</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <View
+                    style={[
+                      styles.iconContainer,
+                      {backgroundColor: '#e3384c'},
+                    ]}>
+                    <MaterialIcon
+                      name="gender-female"
+                      size={50}
+                      style={styles.Icon}
+                    />
+                  </View>
+                  <Text style={styles.genderStyle}>Female</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        )}
+
+  
         <TouchableOpacity onPress={onPress}>
           <View
             style={[
@@ -161,11 +135,7 @@ const GenderScreen = ({navigation}) => {
               styles.inputLabel,
               {backgroundColor: '#fd7c62'},
             ]}>
-            <Text
-              styleKey="textColor"
-              style={[styles.userNameStyle, {color: '#ffffff'}]}>
-              Next
-            </Text>
+            <Text style={[styles.userNameStyle, {color: '#ffffff'}]}>Next</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -349,7 +319,7 @@ const styles = StyleSheet.create({
     minWidth: 230,
     paddingTop: 20,
     minHeight: 60,
-    marginTop: 0,
+    // marginTop: 0,
     borderRadius: 50,
     marginBottom: 30,
   },
@@ -384,7 +354,9 @@ const styles = StyleSheet.create({
   },
   chipBox: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    margin: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 8,
+    width: '100%',
   },
 });

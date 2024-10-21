@@ -314,31 +314,31 @@ const styles = StyleSheet.create({
   },
   inputDrop: {
     borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
+    borderColor: '#000',
+    borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 10,
     backgroundColor: 'white',
   },
   dropContainerStyle: {
-    // Additional styles for the dropdown container
+    borderColor: '#000',
   },
   selectedTextStyle: {
     color: '#000',
   },
   itemTextStyle: {
-    // Style for item text
+    color: '#000',
   },
   placeholderStyle: {
     color: '#999',
   },
   searchStyle: {
-    // Style for search input
+    color: '#000',
   },
   dropdownIcon: {
     position: 'absolute',
     right: 10,
     top: '50%',
-    transform: [{translateY: -50}], // Center the icon vertically
+    transform: [{translateY: -50}],
   },
 });
