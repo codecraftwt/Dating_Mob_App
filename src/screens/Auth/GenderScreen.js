@@ -13,43 +13,26 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {StyleSheet} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { lightTheme } from '../assets/themes';
+import {lightTheme} from '../../assets/themes';
+import {Chip} from 'react-native-elements';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome'; // Renamed import
 
 const {height, width} = Dimensions.get('window');
 
 const GenderScreen = ({navigation}) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [secureTextEntry, setSecureTextEntry] = useState(true);
-
-  const handleNavigation = () => {
-    navigation.navigate('Registration');
-  };
-  const handleNavigationToLogin = () => {
-    navigation.navigate('ForgetPass');
-  };
-
-  const toggleSecureEntry = () => {
-    setSecureTextEntry(!secureTextEntry);
-  };
-
-  const submitLogin = () => {
-    // Handle login submission
-  };
-
   const backButton = () => {
     navigation.navigate('Login');
   };
 
   const onPress = () => {
-    console.log('onpress');
+    navigation.navigate('NameData');
   };
 
   return (
     <>
       <View style={styles.mainContainer}>
         <ImageBackground
-          source={require('../assets/images/profile.png')}
+          source={require('../../assets/images/profile.png')}
           style={styles.imageStyle}
           resizeMode="cover">
           <TouchableOpacity style={styles.backContainer} onPress={backButton}>
@@ -62,19 +45,11 @@ const GenderScreen = ({navigation}) => {
               />
             </View>
             <View style={styles.rightContainer}>
-              <Text style={styles.textStyle}>
-                Back
-              </Text>
+              <Text style={styles.textStyle}>Back</Text>
             </View>
           </TouchableOpacity>
-          <View style={[styles.topContainer, styles.nexStyle]}>
-            <Text
-              style={[
-                styles.textStyle,
-                styles.specialText,
-              ]}>
-              Gender
-            </Text>
+          {/* <View style={[styles.topContainer, styles.nexStyle]}>
+            <Text style={[styles.textStyle, styles.specialText]}>Gender</Text>
           </View>
           <View style={styles.childContainer}>
             <Text
@@ -82,6 +57,67 @@ const GenderScreen = ({navigation}) => {
               styleKey="highlightTextColor">
               Select Your Gender
             </Text>
+          </View> */}
+          <View style={styles.chipBox}>
+            <Chip
+              title="My Self"
+              icon={{
+                name: 'bluetooth',
+                type: 'font-awesome',
+                size: 20,
+                color: 'white',
+              }}
+              containerStyle={{width: 150}} // Corrected width style
+            />
+            <Chip
+              title="My Son"
+              icon={{
+                name: 'bluetooth',
+                type: 'font-awesome',
+                size: 20,
+                color: 'white',
+              }}
+            />
+          </View>
+          <View style={styles.chipBox}>
+            <Chip
+              title="My Daughter"
+              icon={{
+                name: 'bluetooth',
+                type: 'font-awesome',
+                size: 20,
+                color: 'white',
+              }}
+            />
+            <Chip
+              title="My Sister"
+              icon={{
+                name: 'bluetooth',
+                type: 'font-awesome',
+                size: 20,
+                color: 'white',
+              }}
+            />
+          </View>
+          <View style={styles.chipBox}>
+            <Chip
+              title="My Brother"
+              icon={{
+                name: 'bluetooth',
+                type: 'font-awesome',
+                size: 20,
+                color: 'white',
+              }}
+            />
+            <Chip
+              title="My Relative"
+              icon={{
+                name: 'bluetooth',
+                type: 'font-awesome',
+                size: 20,
+                color: 'white',
+              }}
+            />
           </View>
         </ImageBackground>
         <View style={styles.bottomContainer}>
@@ -195,7 +231,7 @@ const styles = StyleSheet.create({
   textStyle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color:lightTheme.highlightTextColor
+    color: lightTheme.highlightTextColor,
   },
   linkText: {
     color: 'blue',
@@ -343,7 +379,12 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
   nexStyle: {
-    marginTop: 100, 
+    marginTop: 100,
     marginBottom: 5,
+  },
+  chipBox: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    margin: 5,
   },
 });

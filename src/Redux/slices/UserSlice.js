@@ -10,7 +10,7 @@ export const loginUser = createAsyncThunk(
     try {
       const res = await axios.post(`${baseURL}login`,data);
       console.log(res, 'response from login api');
-      await saveToken(res.data.token); 
+      // await saveToken(res.data.data.token); 
       return res.data; 
     } catch (error) {
       const errorMessage = error.response?.data?.message || error.message;

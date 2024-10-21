@@ -17,33 +17,26 @@ import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Input from '../../components/Common/Input';
 import RoundButton from '../../components/Common/RoundButton';
 import {lightTheme} from '../../assets/themes';
+import {Dropdown} from 'react-native-element-dropdown';
 
 const {height, width} = Dimensions.get('window');
 
-const RegistrationScreen = ({navigation}) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [secureTextEntry, setSecureTextEntry] = useState(true);
+const Religion = ({navigation}) => {
+  const [firstName, setFirstName] = useState(null);
 
-  const handleNavigation = () => {
+  const goToHome = () => {
     navigation.navigate('Registration');
   };
 
-  const toggleSecureEntry = () => {
-    setSecureTextEntry(!secureTextEntry);
-  };
-
-  const submitLogin = () => {
-    // Handle login submission
-  };
-
-  const goToHome = () => {
-    console.log('goToHome');
-  };
-
   const backButton = () => {
-    navigation.navigate('LoginSelect');
+    navigation.navigate('NameData');
   };
+
+  const firstNameData = [
+    {label: 'John', value: 'John'},
+    {label: 'David', value: 'David'},
+    {label: 'Michael', value: 'Michael'},
+  ];
 
   return (
     <View style={styles.container}>
@@ -82,70 +75,67 @@ const RegistrationScreen = ({navigation}) => {
           </View>
         </ImageBackground>
         <View style={styles.card}>
-          <Text style={styles.signInText}>Sign Up Account</Text>
-          <Input
-            placeholder="Username"
-            // onChangeText={onChangeUsername}
-            // value={username}
-            // errors={errors.username}
-            icon="user"
-            choose={true}
-          />
-          <Input
-            placeholder="Email"
-            // onChangeText={onChangeEmail}
-            // value={email}
-            // errors={errors.email}
-            icon="email"
-            choose={false}
-          />
-          <Input
-            placeholder="Phone"
-            // onChangeText={onChangePhone}
-            // value={phone}
-            // errors={errors.phone}
-            icon="mobile1"
-            choose={true}
-          />
-          <Input
-            placeholder="Password"
-            // onChangeText={onChangePassword}
-            // value={password}
-            // errors={errors.password}
-            secureTextEntry={true}
-            icon="key"
-            choose={true}
-            iconStyle={{transform: [{rotate: '80deg'}]}}
-          />
-          <Input
-            placeholder="Confirm Password"
-            // onChangeText={onChangeConfirm}
-            // value={confirmPass}
-            // errors={errors.confirmPass}
-            secureTextEntry={true}
-            icon="key"
-            confirmIcon={true}
-          />
-          <View style={[styles.searchContainer, styles.checkContainer]}>
-            <View style={styles.iconStyle}>
-              <TouchableOpacity>
-                <MaterialIcon
-                  name={'checkbox-blank-outline'}
-                  size={15}
-                  color={''}
-                  style={{marginBottom: 6}}
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.textContainer}>
-              <Text style={styles.checkText} styleKey="textColor">
-                I agree terms of use and privacy policy
-              </Text>
-            </View>
+          <Text style={styles.signInText}>This Profile Is For</Text>
+          <View style={styles.inputWrapper}>
+            <Dropdown
+              style={styles.inputDrop}
+              data={firstNameData}
+              labelField="label"
+              valueField="value"
+              placeholder="Select Religion"
+              value={firstName}
+              onChange={item => setFirstName(item.value)}
+              selectedTextStyle={styles.selectedTextStyle}
+              containerStyle={styles.dropContainerStyle}
+              itemTextStyle={styles.itemTextStyle}
+              placeholderStyle={styles.placeholderStyle}
+              // Enable search functionality
+              search
+              searchPlaceholder="Search First Name"
+              searchStyle={styles.searchStyle}
+            />
+          </View>
+          <View style={styles.inputWrapper}>
+            <Dropdown
+              style={styles.inputDrop}
+              data={firstNameData}
+              labelField="label"
+              valueField="value"
+              placeholder="Select Community"
+              value={firstName}
+              onChange={item => setFirstName(item.value)}
+              selectedTextStyle={styles.selectedTextStyle}
+              containerStyle={styles.dropContainerStyle}
+              itemTextStyle={styles.itemTextStyle}
+              placeholderStyle={styles.placeholderStyle}
+              // Enable search functionality
+              search
+              searchPlaceholder="Search First Name"
+              searchStyle={styles.searchStyle}
+            />
+          </View>
+          <View style={styles.inputWrapper}>
+            <Dropdown
+              style={styles.inputDrop}
+              data={firstNameData}
+              labelField="label"
+              valueField="value"
+              placeholder="Select Country"
+              value={firstName}
+              onChange={item => setFirstName(item.value)}
+              selectedTextStyle={styles.selectedTextStyle}
+              containerStyle={styles.dropContainerStyle}
+              itemTextStyle={styles.itemTextStyle}
+              placeholderStyle={styles.placeholderStyle}
+              // Enable search functionality
+              search
+              searchPlaceholder="Search First Name"
+              searchStyle={styles.searchStyle}
+            />
           </View>
           <RoundButton
             buttonStyle={styles.signButton}
-            label="SignUp"
+            label="Next"
             buttonColor={lightTheme.appColor}
             labelStyle={lightTheme.highlightTextColor}
             onPress={goToHome}
@@ -156,7 +146,7 @@ const RegistrationScreen = ({navigation}) => {
   );
 };
 
-export default RegistrationScreen;
+export default Religion;
 
 const styles = StyleSheet.create({
   container: {
@@ -316,5 +306,39 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 120,
     height: 120,
+  },
+  inputWrapper: {
+    position: 'relative',
+    width: '100%',
+    margin:10
+  },
+  inputDrop: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    backgroundColor: 'white',
+  },
+  dropContainerStyle: {
+    // Additional styles for the dropdown container
+  },
+  selectedTextStyle: {
+    color: '#000',
+  },
+  itemTextStyle: {
+    // Style for item text
+  },
+  placeholderStyle: {
+    color: '#999',
+  },
+  searchStyle: {
+    // Style for search input
+  },
+  dropdownIcon: {
+    position: 'absolute',
+    right: 10,
+    top: '50%',
+    transform: [{translateY: -50}], // Center the icon vertically
   },
 });

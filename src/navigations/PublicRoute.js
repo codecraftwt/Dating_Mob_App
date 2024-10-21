@@ -5,8 +5,10 @@ import SplashScreen from '../screens/SplashScreen';
 import RegistrationScreen from '../screens/Auth/RegistrationScreen';
 import LoginScreen from '../screens/Auth/LoginScreen';
 import ForgetPassword from '../screens/Auth/ForgetPassword';
-import GenderScreen from '../screens/GenderScreen';
+import GenderScreen from '../screens/Auth/GenderScreen';
 import { ComponentWrapper } from './ComponentWrapper';
+import NameScreen from '../screens/Auth/NameScreen';
+import Religion from '../screens/Auth/Religion';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,18 +18,6 @@ const stackArray = [
     component: props => (
       // <ComponentWrapper>
         <SplashScreen {...props} />
-      // </ComponentWrapper>
-    ),
-    headerProps: {
-      title: 'pro',
-      showBack: false,
-    },
-  },
-  {
-    name: 'Registration',
-    component: props => (
-      // <ComponentWrapper>
-        <RegistrationScreen {...props} />
       // </ComponentWrapper>
     ),
     headerProps: {
@@ -48,10 +38,10 @@ const stackArray = [
     },
   },
   {
-    name: 'ForgetPass',
+    name: 'Gender',
     component: props => (
       // <ComponentWrapper>
-        <ForgetPassword {...props} />
+        <GenderScreen {...props} />
       // </ComponentWrapper>
     ),
     headerProps: {
@@ -60,10 +50,46 @@ const stackArray = [
     },
   },
   {
-    name: 'Gender',
+    name: 'NameData',
     component: props => (
       // <ComponentWrapper>
-        <GenderScreen {...props} />
+        <NameScreen {...props} />
+      // </ComponentWrapper>
+    ),
+    headerProps: {
+      title: 'pro',
+      showBack: false,
+    },
+  },
+  {
+    name: 'ReligionData',
+    component: props => (
+      // <ComponentWrapper>
+        <Religion {...props} />
+      // </ComponentWrapper>
+    ),
+    headerProps: {
+      title: 'pro',
+      showBack: false,
+    },
+  },
+  {
+    name: 'Registration',
+    component: props => (
+      // <ComponentWrapper>
+        <RegistrationScreen {...props} />
+      // </ComponentWrapper>
+    ),
+    headerProps: {
+      title: 'pro',
+      showBack: false,
+    },
+  },
+  {
+    name: 'ForgetPass',
+    component: props => (
+      // <ComponentWrapper>
+        <ForgetPassword {...props} />
       // </ComponentWrapper>
     ),
     headerProps: {

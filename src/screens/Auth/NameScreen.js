@@ -20,29 +20,17 @@ import {lightTheme} from '../../assets/themes';
 
 const {height, width} = Dimensions.get('window');
 
-const RegistrationScreen = ({navigation}) => {
+const NameScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [secureTextEntry, setSecureTextEntry] = useState(true);
 
-  const handleNavigation = () => {
-    navigation.navigate('Registration');
-  };
-
-  const toggleSecureEntry = () => {
-    setSecureTextEntry(!secureTextEntry);
-  };
-
-  const submitLogin = () => {
-    // Handle login submission
-  };
-
-  const goToHome = () => {
-    console.log('goToHome');
+  const goToNext = () => {
+    navigation.navigate('ReligionData');
   };
 
   const backButton = () => {
-    navigation.navigate('LoginSelect');
+    navigation.navigate('Gender');
   };
 
   return (
@@ -82,73 +70,37 @@ const RegistrationScreen = ({navigation}) => {
           </View>
         </ImageBackground>
         <View style={styles.card}>
-          <Text style={styles.signInText}>Sign Up Account</Text>
+          <Text style={styles.signInText}>This Profile Is For</Text>
           <Input
-            placeholder="Username"
+            placeholder="Enter Your First Name"
             // onChangeText={onChangeUsername}
             // value={username}
             // errors={errors.username}
-            icon="user"
+            icon="form"
             choose={true}
           />
           <Input
-            placeholder="Email"
+            placeholder="Enter Your Last Name"
             // onChangeText={onChangeEmail}
             // value={email}
             // errors={errors.email}
-            icon="email"
-            choose={false}
+            icon="form"
+            choose={true}
           />
           <Input
-            placeholder="Phone"
+            placeholder="Enter Date Of Birth"
             // onChangeText={onChangePhone}
             // value={phone}
             // errors={errors.phone}
-            icon="mobile1"
+            icon="calendar"
             choose={true}
           />
-          <Input
-            placeholder="Password"
-            // onChangeText={onChangePassword}
-            // value={password}
-            // errors={errors.password}
-            secureTextEntry={true}
-            icon="key"
-            choose={true}
-            iconStyle={{transform: [{rotate: '80deg'}]}}
-          />
-          <Input
-            placeholder="Confirm Password"
-            // onChangeText={onChangeConfirm}
-            // value={confirmPass}
-            // errors={errors.confirmPass}
-            secureTextEntry={true}
-            icon="key"
-            confirmIcon={true}
-          />
-          <View style={[styles.searchContainer, styles.checkContainer]}>
-            <View style={styles.iconStyle}>
-              <TouchableOpacity>
-                <MaterialIcon
-                  name={'checkbox-blank-outline'}
-                  size={15}
-                  color={''}
-                  style={{marginBottom: 6}}
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.textContainer}>
-              <Text style={styles.checkText} styleKey="textColor">
-                I agree terms of use and privacy policy
-              </Text>
-            </View>
-          </View>
           <RoundButton
             buttonStyle={styles.signButton}
-            label="SignUp"
+            label="Next"
             buttonColor={lightTheme.appColor}
             labelStyle={lightTheme.highlightTextColor}
-            onPress={goToHome}
+            onPress={goToNext}
           />
         </View>
       </ScrollView>
@@ -156,7 +108,7 @@ const RegistrationScreen = ({navigation}) => {
   );
 };
 
-export default RegistrationScreen;
+export default NameScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -169,7 +121,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    top: height * 0.35,
+    top: height * 0.45,
     width: '80%',
     alignSelf: 'center',
     padding: 20,

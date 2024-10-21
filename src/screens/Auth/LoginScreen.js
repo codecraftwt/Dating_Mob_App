@@ -20,6 +20,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useDispatch, useSelector} from 'react-redux';
 import {loginUser} from '../../Redux/slices/UserSlice';
 import Toast from 'react-native-toast-message';
+import { saveToken } from '../../utils/StorageUtils';
 
 const {height, width} = Dimensions.get('window');
 
@@ -74,6 +75,8 @@ const LoginScreen = ({navigation}) => {
       dispatch(loginUser({data})).then(({payload})=>{
         console.log(payload.status,'payload.status')
         if (payload.status === 200) {
+          console.log(payload.data.token,"token")
+        //  saveToken(payload.data.token);
           Toast.show({
             type: 'success',
             text1: 'Login Successful',

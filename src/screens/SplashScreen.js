@@ -12,7 +12,7 @@ const SplashScreen = () => {
   const navigation = useNavigation();
 
   const handleNavigationToRegister = () => {
-    navigation.navigate('Registration');
+    navigation.navigate('Gender');
   };
 
   const handleNavigationToLogin = () => {
