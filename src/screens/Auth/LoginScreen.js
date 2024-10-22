@@ -82,7 +82,7 @@ const LoginScreen = ({navigation}) => {
             text1: 'Login Successful',
             position: 'bottom',
           });
-          navigation.navigate('Gender');
+          navigation.navigate('bottomtabbar');
         }
       });
     } else {

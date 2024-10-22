@@ -9,6 +9,7 @@ import GenderScreen from '../screens/Auth/GenderScreen';
 import { ComponentWrapper } from './ComponentWrapper';
 import NameScreen from '../screens/Auth/NameScreen';
 import Religion from '../screens/Auth/Religion';
+import BottomTabBar from './BottomTabBar';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,18 @@ const stackArray = [
     component: props => (
       // <ComponentWrapper>
         <LoginScreen {...props} />
+      // </ComponentWrapper>
+    ),
+    headerProps: {
+      title: 'pro',
+      showBack: false,
+    },
+  },
+  {
+    name: 'bottomtabbar',
+    component: props => (
+      // <ComponentWrapper>
+        <BottomTabBar {...props} />
       // </ComponentWrapper>
     ),
     headerProps: {
