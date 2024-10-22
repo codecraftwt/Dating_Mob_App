@@ -17,16 +17,31 @@ import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Input from '../../components/Common/Input';
 import RoundButton from '../../components/Common/RoundButton';
 import {lightTheme} from '../../assets/themes';
+import {useDispatch} from 'react-redux'; // Add this to use dispatch
+import {setFields} from '../../Redux/slices/UserRegisterSlice';
 
 const {height, width} = Dimensions.get('window');
 
 const NameScreen = ({navigation}) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [secureTextEntry, setSecureTextEntry] = useState(true);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [dob, setDob] = useState('');
+  const dispatch = useDispatch(); // Initialize dispatch
 
   const goToNext = () => {
-    navigation.navigate('ReligionData');
+    if (firstName && lastName && dob) {
+      const formData = {
+        firstName: firstName,
+        lastName: lastName,
+        dateOfBirth: dob,
+      };
+      // Dispatch the formData to Redux
+      dispatch(setFields(formData));
+      console.log(formData, 'formData');
+      navigation.navigate('ReligionData');
+    } else {
+      alert('Please fill all the fields');
+    }
   };
 
   const backButton = () => {
@@ -73,25 +88,22 @@ const NameScreen = ({navigation}) => {
           <Text style={styles.signInText}>This Profile Is For</Text>
           <Input
             placeholder="Enter Your First Name"
-            // onChangeText={onChangeUsername}
-            // value={username}
-            // errors={errors.username}
+            onChangeText={(text) => setFirstName(text)} 
+            value={firstName}
             icon="form"
             choose={true}
           />
           <Input
             placeholder="Enter Your Last Name"
-            // onChangeText={onChangeEmail}
-            // value={email}
-            // errors={errors.email}
+            onChangeText={(text) => setLastName(text)} 
+            value={lastName}
             icon="form"
             choose={true}
           />
           <Input
             placeholder="Enter Date Of Birth"
-            // onChangeText={onChangePhone}
-            // value={phone}
-            // errors={errors.phone}
+            onChangeText={(text) => setDob(text)} 
+            value={dob}
             icon="calendar"
             choose={true}
           />
@@ -145,74 +157,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 10,
     marginBottom: 10,
-  },
-  passwordContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  passwordInput: {
-    flex: 1,
-    height: '100%',
-    paddingHorizontal: 10,
-  },
-  icon: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 10,
-  },
-  text: {
-    marginTop: 20,
-    fontSize: 16,
-    textAlign: 'center',
-  },
-  linkText: {
-    color: 'blue',
-    textDecorationLine: 'underline',
-  },
-  searchContainer: {
-    borderBottomWidth: 0.5,
-    flexDirection: 'row',
-    alignItems: 'center',
-    // paddingTop: 10,
-    paddingBottom: 0,
-  },
-  iconStyle: {
-    flex: 0,
-    alignItems: 'flex-start',
-  },
-  textContainer: {
-    flex: 2,
-    height: 35,
-    paddingLeft: 10,
-    marginTop: 5,
-  },
-  button2: {
-    backgroundColor: '#FF0000',
-    padding: 8,
-    borderRadius: 20,
-    alignItems: 'center',
-    marginVertical: 10,
-    minWidth: 200,
-  },
-  buttonText2: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  forgetStyle: {
-    fontWeight: 'bold',
-    textAlign: 'right',
-    marginTop: 10,
-    marginBottom: 15,
-    fontSize: 12,
-  },
-  forgetContainer: {
-    alignSelf: 'flex-end',
-    alignItems: 'flex-end',
-  },
-  checkContainer: {
-    borderBottomWidth: 0,
-    paddingTop: 10,
   },
   signButton: {
     minWidth: 230,

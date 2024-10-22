@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {StyleSheet} from 'react-native';
@@ -17,33 +17,74 @@ import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Input from '../../components/Common/Input';
 import RoundButton from '../../components/Common/RoundButton';
 import {lightTheme} from '../../assets/themes';
+import {
+  clearRegistration,
+  registerUser,
+  setFields,
+} from '../../Redux/slices/UserRegisterSlice';
+import {useDispatch, useSelector} from 'react-redux';
 
 const {height, width} = Dimensions.get('window');
 
 const RegistrationScreen = ({navigation}) => {
+  const dispatch = useDispatch();
+  const [username, setUserName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [secureTextEntry, setSecureTextEntry] = useState(true);
-
-  const handleNavigation = () => {
-    navigation.navigate('Registration');
-  };
-
-  const toggleSecureEntry = () => {
-    setSecureTextEntry(!secureTextEntry);
-  };
-
-  const submitLogin = () => {
-    // Handle login submission
-  };
-
-  const goToHome = () => {
-    console.log('goToHome');
-  };
+  const data = useSelector(state => state.userRegister.data);
 
   const backButton = () => {
     navigation.navigate('ReligionData');
   };
+
+  const handleRegister = async () => {
+    if (!username || !email || !phone || !password || !confirmPassword) {
+      alert('Please fill all the fields');
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      alert('Passwords do not match');
+      return;
+    }
+    const formData = {
+      username: username,
+      email: email,
+      mobile: phone,
+      password: password,
+      confirmPassword: confirmPassword,
+    };
+    const mergedData = {
+      ...data,
+      ...formData,
+    };
+    dispatch(setFields(formData));
+    await handleSignIn(mergedData);
+  };
+
+  const handleSignIn = async (mergedData) => {
+    try {
+      const response = await dispatch(registerUser(mergedData));
+
+      if (response.error) {
+        console.error('Registration failed:', response.error.message);
+        alert('Registration failed. Please try again.');
+      } else {
+        dispatch(clearRegistration());
+        navigation.navigate('SuccessScreen'); 
+      }
+    } catch (error) {
+      console.error('Error during registration:', error);
+      alert('An error occurred during registration. Please try again.');
+    }
+  };
+
+  useEffect(() => {
+    console.log('Updated Redux Data:', data);
+  }, [data]);
 
   return (
     <View style={styles.container}>
@@ -85,33 +126,29 @@ const RegistrationScreen = ({navigation}) => {
           <Text style={styles.signInText}>Sign Up Account</Text>
           <Input
             placeholder="Username"
-            // onChangeText={onChangeUsername}
-            // value={username}
-            // errors={errors.username}
+            onChangeText={text => setUserName(text)}
+            value={username}
             icon="user"
             choose={true}
           />
           <Input
             placeholder="Email"
-            // onChangeText={onChangeEmail}
-            // value={email}
-            // errors={errors.email}
+            onChangeText={text => setEmail(text)}
+            value={email}
             icon="email"
             choose={false}
           />
           <Input
             placeholder="Phone"
-            // onChangeText={onChangePhone}
-            // value={phone}
-            // errors={errors.phone}
+            onChangeText={text => setPhone(text)}
+            value={phone}
             icon="mobile1"
             choose={true}
           />
           <Input
             placeholder="Password"
-            // onChangeText={onChangePassword}
-            // value={password}
-            // errors={errors.password}
+            onChangeText={text => setPassword(text)}
+            value={password}
             secureTextEntry={true}
             icon="key"
             choose={true}
@@ -119,9 +156,8 @@ const RegistrationScreen = ({navigation}) => {
           />
           <Input
             placeholder="Confirm Password"
-            // onChangeText={onChangeConfirm}
-            // value={confirmPass}
-            // errors={errors.confirmPass}
+            onChangeText={text => setConfirmPassword(text)}
+            value={confirmPassword}
             secureTextEntry={true}
             icon="key"
             confirmIcon={true}
@@ -148,7 +184,7 @@ const RegistrationScreen = ({navigation}) => {
             label="SignUp"
             buttonColor={lightTheme.appColor}
             labelStyle={lightTheme.highlightTextColor}
-            onPress={goToHome}
+            onPress={handleRegister}
           />
         </View>
       </ScrollView>

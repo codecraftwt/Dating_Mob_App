@@ -1,32 +1,34 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import axios from 'axios';
 import {baseURL} from '../../utils/api';
-import { saveToken } from '../../utils/StorageUtils';
+import {saveToken} from '../../utils/StorageUtils';
+
+const initialState = {
+  isLoading: false,
+  data: {},
+  error: null,
+};
 
 export const loginUser = createAsyncThunk(
   'user/loginUser',
   async ({data}, {rejectWithValue}) => {
-    console.log(data,'loginUser checking api call')
+    console.log(data, 'loginUser checking api call');
     try {
-      const res = await axios.post(`${baseURL}login`,data);
+      const res = await axios.post(`${baseURL}login`, data);
       console.log(res, 'response from login api');
-      // await saveToken(res.data.data.token); 
-      return res.data; 
+      // await saveToken(res.data.data.token);
+      return res.data;
     } catch (error) {
       const errorMessage = error.response?.data?.message || error.message;
       console.log(errorMessage, 'error from loginUser');
-      return rejectWithValue(errorMessage); 
+      return rejectWithValue(errorMessage);
     }
   },
 );
 
 const userSlice = createSlice({
   name: 'user',
-  initialState: {
-    isLoading: false,
-    data: {},
-    error: null,
-  },
+  initialState,
   reducers: {
     clearStore: state => {
       state.data = {};

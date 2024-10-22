@@ -18,24 +18,53 @@ import Input from '../../components/Common/Input';
 import RoundButton from '../../components/Common/RoundButton';
 import {lightTheme} from '../../assets/themes';
 import {Dropdown} from 'react-native-element-dropdown';
+import { setFields } from '../../Redux/slices/UserRegisterSlice';
+import { useDispatch } from 'react-redux';
 
 const {height, width} = Dimensions.get('window');
 
 const Religion = ({navigation}) => {
-  const [firstName, setFirstName] = useState(null);
+  const dispatch = useDispatch();
+  const [religion, setReligion] = useState(null);
+  const [community, setCommunity] = useState(null);
+  const [country, setCountry] = useState(null);
 
   const goToHome = () => {
-    navigation.navigate('Registration');
+    if (religion && community && country) {
+      const formData = {
+        religion: religion,
+        motherTongue: community,
+        country: country,
+      };
+      // Dispatch the formData to Redux
+      dispatch(setFields(formData));
+      console.log(formData, 'formData');
+      navigation.navigate('Registration');
+    } else {
+      alert('Please fill all the fields');
+    }
   };
 
   const backButton = () => {
     navigation.navigate('NameData');
   };
 
-  const firstNameData = [
-    {label: 'John', value: 'John'},
-    {label: 'David', value: 'David'},
-    {label: 'Michael', value: 'Michael'},
+  const Community = [
+    {label: 'Marathi', value: 'Marathi'},
+    {label: 'Hindi', value: 'Hindi'},
+    {label: 'Tamil', value: 'Tamil'},
+  ];
+
+  const ReligionData = [
+    {label: 'Hindu', value: 'Hindu'},
+    {label: 'Christian', value: 'Christian'},
+    {label: 'Muslim', value: 'Muslim'},
+  ];
+
+  const Country = [
+    {label: 'India', value: 'India'},
+    {label: 'USA', value: 'USA'},
+    {label: 'England', value: 'England'},
   ];
 
   return (
@@ -79,12 +108,12 @@ const Religion = ({navigation}) => {
           <View style={styles.inputWrapper}>
             <Dropdown
               style={styles.inputDrop}
-              data={firstNameData}
+              data={ReligionData}
               labelField="label"
               valueField="value"
               placeholder="Select Religion"
-              value={firstName}
-              onChange={item => setFirstName(item.value)}
+              value={religion}
+              onChange={item => setReligion(item.value)}
               selectedTextStyle={styles.selectedTextStyle}
               containerStyle={styles.dropContainerStyle}
               itemTextStyle={styles.itemTextStyle}
@@ -98,12 +127,12 @@ const Religion = ({navigation}) => {
           <View style={styles.inputWrapper}>
             <Dropdown
               style={styles.inputDrop}
-              data={firstNameData}
+              data={Community}
               labelField="label"
               valueField="value"
               placeholder="Select Community"
-              value={firstName}
-              onChange={item => setFirstName(item.value)}
+              value={community}
+              onChange={item => setCommunity(item.value)}
               selectedTextStyle={styles.selectedTextStyle}
               containerStyle={styles.dropContainerStyle}
               itemTextStyle={styles.itemTextStyle}
@@ -117,12 +146,12 @@ const Religion = ({navigation}) => {
           <View style={styles.inputWrapper}>
             <Dropdown
               style={styles.inputDrop}
-              data={firstNameData}
+              data={Country}
               labelField="label"
               valueField="value"
               placeholder="Select Country"
-              value={firstName}
-              onChange={item => setFirstName(item.value)}
+              value={country}
+              onChange={item => setCountry(item.value)}
               selectedTextStyle={styles.selectedTextStyle}
               containerStyle={styles.dropContainerStyle}
               itemTextStyle={styles.itemTextStyle}
@@ -310,7 +339,7 @@ const styles = StyleSheet.create({
   inputWrapper: {
     position: 'relative',
     width: '100%',
-    margin:10
+    margin: 10,
   },
   inputDrop: {
     borderWidth: 1,
