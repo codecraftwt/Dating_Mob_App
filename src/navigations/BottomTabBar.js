@@ -15,6 +15,7 @@ import { w } from 'walstar-rn-responsive';
 import { useSelector } from 'react-redux';
 import { globalColors } from '../styles/globalColors';
 import GenderScreen from '../screens/Auth/GenderScreen';
+import Profile from '../screens/Profile';
 
 
 const Tab = createBottomTabNavigator();
@@ -70,7 +71,7 @@ export default function BottomTabBar(props) {
         />
         <Tab.Screen
           name="Fourth"
-          component={GenderScreen}
+          component={Profile}
           options={{
             tabBarLabel: '',
             tabBarIcon: ({ focused }) => (

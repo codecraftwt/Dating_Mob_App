@@ -10,6 +10,7 @@ import { ComponentWrapper } from './ComponentWrapper';
 import NameScreen from '../screens/Auth/NameScreen';
 import Religion from '../screens/Auth/Religion';
 import BottomTabBar from './BottomTabBar';
+import Profile from '../screens/Profile';
 
 const Stack = createNativeStackNavigator();
 
@@ -103,6 +104,18 @@ const stackArray = [
     component: props => (
       // <ComponentWrapper>
         <ForgetPassword {...props} />
+      // </ComponentWrapper>
+    ),
+    headerProps: {
+      title: 'pro',
+      showBack: false,
+    },
+  },
+  {
+    name: 'Profile',
+    component: props => (
+      // <ComponentWrapper>
+        <Profile {...props} />
       // </ComponentWrapper>
     ),
     headerProps: {
