@@ -18,8 +18,9 @@ import Input from '../../components/Common/Input';
 import RoundButton from '../../components/Common/RoundButton';
 import {lightTheme} from '../../assets/themes';
 import {Dropdown} from 'react-native-element-dropdown';
-import { setFields } from '../../Redux/slices/UserRegisterSlice';
-import { useDispatch } from 'react-redux';
+import {setFields} from '../../Redux/slices/UserRegisterSlice';
+import {useDispatch} from 'react-redux';
+import BackButton from '../../components/Common/BackButton';
 
 const {height, width} = Dimensions.get('window');
 
@@ -43,10 +44,6 @@ const Religion = ({navigation}) => {
     } else {
       alert('Please fill all the fields');
     }
-  };
-
-  const backButton = () => {
-    navigation.navigate('NameData');
   };
 
   const Community = [
@@ -74,21 +71,7 @@ const Religion = ({navigation}) => {
           source={require('../../assets/images/dual-tone.png')}
           style={styles.background}
           resizeMode="cover">
-          <TouchableOpacity style={styles.backContainer} onPress={backButton}>
-            <View style={styles.leftContainer}>
-              <MaterialIcon
-                name="chevron-left-circle-outline"
-                size={30}
-                color={lightTheme.highlightTextColor}
-                style={styles.backIcon}
-              />
-            </View>
-            <View style={styles.rightContainer}>
-              <Text styleKey="highlightTextColor" style={styles.textStyle}>
-                Back
-              </Text>
-            </View>
-          </TouchableOpacity>
+          <BackButton navigation={navigation} />
           <View style={[styles.topContainer, styles.imageContainer]}>
             <Image
               source={require('../../assets/images/logo.png')}
@@ -285,11 +268,6 @@ const styles = StyleSheet.create({
     minWidth: 230,
     marginTop: 40,
   },
-  backContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingLeft: 20,
-  },
   imageContainer: {
     marginTop: 10,
     marginBottom: 10,
@@ -315,21 +293,6 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     marginTop: 80,
     marginBottom: 20,
-  },
-  rightContainer: {
-    flex: 3,
-    justifyContent: 'center',
-    paddingTop: 17,
-    paddingLeft: 5,
-  },
-  leftContainer: {
-    flex: 0,
-    justifyContent: 'flex-start',
-  },
-  backIcon: {
-    fontSize: 25,
-    paddingTop: 20,
-    paddingLeft: 25,
   },
   logoImage: {
     justifyContent: 'center',

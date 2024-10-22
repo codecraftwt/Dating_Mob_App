@@ -15,6 +15,7 @@ import {lightTheme} from '../../assets/themes';
 import Chips from '../../components/Common/Chip';
 import {useDispatch} from 'react-redux';
 import {setFields} from '../../Redux/slices/UserRegisterSlice';
+import BackButton from '../../components/Common/BackButton';
 
 const {height, width} = Dimensions.get('window');
 
@@ -22,9 +23,6 @@ const GenderScreen = ({navigation}) => {
   const [selectedChip, setSelectedChip] = useState(null);
   const [selectedGender, setSelectedGender] = useState('');
   const dispatch = useDispatch();
-  const backButton = () => {
-    navigation.navigate('LoginSelect');
-  };
 
   const onPress = () => {
     console.log(selectedGender, 'selectedGender');
@@ -66,20 +64,7 @@ const GenderScreen = ({navigation}) => {
         source={require('../../assets/images/profile.png')}
         style={styles.imageStyle}
         resizeMode="cover">
-        <TouchableOpacity style={styles.backContainer} onPress={backButton}>
-          <View style={styles.leftContainer}>
-            <MaterialIcon
-              name="chevron-left-circle-outline"
-              size={30}
-              color="#ffffff"
-              style={styles.backIcon}
-            />
-          </View>
-          <View style={styles.rightContainer}>
-            <Text style={styles.textStyle}>Back</Text>
-          </View>
-        </TouchableOpacity>
-
+        <BackButton navigation={navigation}/>
         <View style={styles.childContainer}>
           <Text style={[styles.forgotPassword, {color: '#000'}]}>
             This Profile is for
@@ -169,24 +154,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 300,
   },
-  backContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  leftContainer: {
-    flex: 0,
-    justifyContent: 'flex-start',
-  },
-  backIcon: {
-    fontSize: 25,
-    paddingTop: 20,
-    paddingLeft: 25,
-  },
-  textStyle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: lightTheme.highlightTextColor,
-  },
+
   childContainer: {
     flexDirection: 'row',
     justifyContent: 'center',

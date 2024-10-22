@@ -21,6 +21,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {loginUser} from '../../Redux/slices/UserSlice';
 import Toast from 'react-native-toast-message';
 import { saveToken } from '../../utils/StorageUtils';
+import BackButton from '../../components/Common/BackButton';
 
 const {height, width} = Dimensions.get('window');
 
@@ -94,10 +95,6 @@ const LoginScreen = ({navigation}) => {
     navigation.navigate('Gender');
   };
 
-  const backButton = () => {
-    navigation.navigate('LoginSelect');
-  };
-
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -105,21 +102,7 @@ const LoginScreen = ({navigation}) => {
           source={require('../../assets/images/dual-tone.png')}
           style={styles.background}
           resizeMode="cover">
-          <TouchableOpacity style={styles.backContainer} onPress={backButton}>
-            <View style={styles.leftContainer}>
-              <MaterialIcon
-                name="chevron-left-circle-outline"
-                size={30}
-                color={lightTheme.highlightTextColor}
-                style={styles.backIcon}
-              />
-            </View>
-            <View style={styles.rightContainer}>
-              <Text styleKey="highlightTextColor" style={styles.textStyle}>
-                Back
-              </Text>
-            </View>
-          </TouchableOpacity>
+          <BackButton navigation={navigation}/>
           <View style={[styles.topContainer, styles.imageContainer]}>
             <Image
               source={require('../../assets/images/logo.png')}
@@ -278,21 +261,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     alignItems: 'flex-end',
   },
-  leftContainer: {
-    flex: 0,
-    justifyContent: 'flex-start',
-  },
-  backContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingLeft: 20,
-  },
-  rightContainer: {
-    flex: 3,
-    justifyContent: 'center',
-    paddingTop: 17,
-    paddingLeft: 5,
-  },
+
   topContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -301,16 +270,6 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     marginTop: 80,
     marginBottom: 20,
-  },
-  backIcon: {
-    fontSize: 25,
-    paddingTop: 20,
-    paddingLeft: 25,
-  },
-  textStyle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: lightTheme.highlightTextColor,
   },
   imageContainer: {
     marginTop: 80,

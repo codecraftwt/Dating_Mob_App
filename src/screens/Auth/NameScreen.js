@@ -19,6 +19,7 @@ import RoundButton from '../../components/Common/RoundButton';
 import {lightTheme} from '../../assets/themes';
 import {useDispatch} from 'react-redux'; // Add this to use dispatch
 import {setFields} from '../../Redux/slices/UserRegisterSlice';
+import BackButton from '../../components/Common/BackButton';
 
 const {height, width} = Dimensions.get('window');
 
@@ -44,10 +45,6 @@ const NameScreen = ({navigation}) => {
     }
   };
 
-  const backButton = () => {
-    navigation.navigate('Gender');
-  };
-
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
@@ -55,21 +52,7 @@ const NameScreen = ({navigation}) => {
           source={require('../../assets/images/dual-tone.png')}
           style={styles.background}
           resizeMode="cover">
-          <TouchableOpacity style={styles.backContainer} onPress={backButton}>
-            <View style={styles.leftContainer}>
-              <MaterialIcon
-                name="chevron-left-circle-outline"
-                size={30}
-                color={lightTheme.highlightTextColor}
-                style={styles.backIcon}
-              />
-            </View>
-            <View style={styles.rightContainer}>
-              <Text styleKey="highlightTextColor" style={styles.textStyle}>
-                Back
-              </Text>
-            </View>
-          </TouchableOpacity>
+          <BackButton navigation={navigation} />
           <View style={[styles.topContainer, styles.imageContainer]}>
             <Image
               source={require('../../assets/images/logo.png')}
@@ -88,21 +71,21 @@ const NameScreen = ({navigation}) => {
           <Text style={styles.signInText}>This Profile Is For</Text>
           <Input
             placeholder="Enter Your First Name"
-            onChangeText={(text) => setFirstName(text)} 
+            onChangeText={text => setFirstName(text)}
             value={firstName}
             icon="form"
             choose={true}
           />
           <Input
             placeholder="Enter Your Last Name"
-            onChangeText={(text) => setLastName(text)} 
+            onChangeText={text => setLastName(text)}
             value={lastName}
             icon="form"
             choose={true}
           />
           <Input
             placeholder="Enter Date Of Birth"
-            onChangeText={(text) => setDob(text)} 
+            onChangeText={text => setDob(text)}
             value={dob}
             icon="calendar"
             choose={true}
@@ -162,11 +145,6 @@ const styles = StyleSheet.create({
     minWidth: 230,
     marginTop: 40,
   },
-  backContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingLeft: 20,
-  },
   imageContainer: {
     marginTop: 10,
     marginBottom: 10,
@@ -192,21 +170,6 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     marginTop: 80,
     marginBottom: 20,
-  },
-  rightContainer: {
-    flex: 3,
-    justifyContent: 'center',
-    paddingTop: 17,
-    paddingLeft: 5,
-  },
-  leftContainer: {
-    flex: 0,
-    justifyContent: 'flex-start',
-  },
-  backIcon: {
-    fontSize: 25,
-    paddingTop: 20,
-    paddingLeft: 25,
   },
   logoImage: {
     justifyContent: 'center',

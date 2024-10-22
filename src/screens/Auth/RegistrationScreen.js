@@ -23,6 +23,7 @@ import {
   setFields,
 } from '../../Redux/slices/UserRegisterSlice';
 import {useDispatch, useSelector} from 'react-redux';
+import BackButton from '../../components/Common/BackButton';
 
 const {height, width} = Dimensions.get('window');
 
@@ -35,10 +36,6 @@ const RegistrationScreen = ({navigation}) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const data = useSelector(state => state.userRegister.data);
-
-  const backButton = () => {
-    navigation.navigate('ReligionData');
-  };
 
   const handleRegister = async () => {
     if (!username || !email || !phone || !password || !confirmPassword) {
@@ -93,21 +90,7 @@ const RegistrationScreen = ({navigation}) => {
           source={require('../../assets/images/dual-tone.png')}
           style={styles.background}
           resizeMode="cover">
-          <TouchableOpacity style={styles.backContainer} onPress={backButton}>
-            <View style={styles.leftContainer}>
-              <MaterialIcon
-                name="chevron-left-circle-outline"
-                size={30}
-                color={lightTheme.highlightTextColor}
-                style={styles.backIcon}
-              />
-            </View>
-            <View style={styles.rightContainer}>
-              <Text styleKey="highlightTextColor" style={styles.textStyle}>
-                Back
-              </Text>
-            </View>
-          </TouchableOpacity>
+         <BackButton navigation={navigation}/>
           <View style={[styles.topContainer, styles.imageContainer]}>
             <Image
               source={require('../../assets/images/logo.png')}
@@ -332,21 +315,6 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     marginTop: 80,
     marginBottom: 20,
-  },
-  rightContainer: {
-    flex: 3,
-    justifyContent: 'center',
-    paddingTop: 17,
-    paddingLeft: 5,
-  },
-  leftContainer: {
-    flex: 0,
-    justifyContent: 'flex-start',
-  },
-  backIcon: {
-    fontSize: 25,
-    paddingTop: 20,
-    paddingLeft: 25,
   },
   logoImage: {
     justifyContent: 'center',

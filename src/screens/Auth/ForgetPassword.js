@@ -14,34 +14,11 @@ import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import RoundButton from '../../components/Common/RoundButton';
 import {lightTheme} from '../../assets/themes';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import BackButton from '../../components/Common/BackButton';
 
 const {height, width} = Dimensions.get('window');
 
 const ForgetPassword = ({navigation}) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [secureTextEntry, setSecureTextEntry] = useState(true);
-
-  const handleNavigationToLogin = () => {
-    navigation.navigate('Registration');
-  };
-
-  const handleNavigationToRegister = () => {
-    navigation.navigate('Registration');
-  };
-
-  const toggleSecureEntry = () => {
-    setSecureTextEntry(!secureTextEntry);
-  };
-
-  const submitLogin = () => {
-    // Handle login submission
-  };
-
-  const backButton = () => {
-    navigation.navigate('Login');
-  };
-
   return (
     <>
       <View style={styles.mainContainer}>
@@ -49,19 +26,7 @@ const ForgetPassword = ({navigation}) => {
           source={require('../../assets/images/dual-tone.png')}
           style={styles.imageStyle}
           resizeMode="cover">
-          <TouchableOpacity style={styles.backContainer} onPress={backButton}>
-            <View style={styles.leftContainer}>
-              <MaterialIcon
-                name="chevron-left-circle-outline"
-                size={30}
-                color={lightTheme.highlightTextColor}
-                style={styles.backIcon}
-              />
-            </View>
-            <View style={styles.rightContainer}>
-              <Text style={styles.textStyle2}>Back</Text>
-            </View>
-          </TouchableOpacity>
+          <BackButton navigation={navigation} />
           <View style={[styles.topContainer, styles.extraStyle]}>
             <View style={[styles.forgetContainer, {backgroundColor: '#fff'}]}>
               <Image
@@ -158,26 +123,6 @@ const styles = StyleSheet.create({
     paddingLeft: 25,
     justifyContent: 'center',
     borderRadius: 50,
-  },
-  backContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingLeft: 20,
-  },
-  leftContainer: {
-    flex: 0,
-    justifyContent: 'flex-start',
-  },
-  rightContainer: {
-    flex: 3,
-    justifyContent: 'center',
-    paddingTop: 17,
-    paddingLeft: 5,
-  },
-  backIcon: {
-    fontSize: 25,
-    paddingTop: 20,
-    paddingLeft: 25,
   },
   topContainer: {
     flexDirection: 'row',
