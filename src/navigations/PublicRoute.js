@@ -14,6 +14,7 @@ import Profile from '../screens/Profile';
 import EditProfile from '../screens/EditProfile';
 import Nearby from '../screens/Nearby';
 import Messsage from '../screens/Messsage';
+import Calling from '../screens/Calling';
 
 const Stack = createNativeStackNavigator();
 
@@ -155,6 +156,18 @@ const stackArray = [
     component: props => (
       // <ComponentWrapper>
         <Messsage {...props} />
+      // </ComponentWrapper>
+    ),
+    headerProps: {
+      title: 'pro',
+      showBack: false,
+    },
+  },
+  {
+    name: 'Calling',
+    component: props => (
+      // <ComponentWrapper>
+        <Calling {...props} />
       // </ComponentWrapper>
     ),
     headerProps: {
