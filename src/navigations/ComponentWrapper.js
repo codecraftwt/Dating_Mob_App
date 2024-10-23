@@ -4,24 +4,23 @@ import propTypes from 'prop-types';
 // import { globalColors } from '../Theme/globalColors';
 import { w } from 'walstar-rn-responsive';
 
-export const ComponentWrapper = (props) => {
-  const { edges } = props.children.props
+export const ComponentWrapper = ({ children, statusBarColor = "#fff" }) => {
+  const { edges } = children.props;
+
   return (
     <>
       <StatusBar
         barStyle='default'
         animated={true}
-        // backgroundColor={globalColors.primaryTheme}
+        backgroundColor={statusBarColor} // Use the statusBarColor prop
       />
       {/* <View style={{backgroundColor:globalColors.primaryTheme,flexGrow:1,borderBottomRightRadius:40,borderBottomLeftRadius:40}}> */}
-      {props.children}
+      {children}
       {/* </View> */}
     </>
   );
 };
+
 ComponentWrapper.propTypes = {
-  statusBarColor: propTypes.string
-}
-ComponentWrapper.defaultProps = {
-  statusBarColor: "#fff"
-}
+  statusBarColor: propTypes.string,
+};

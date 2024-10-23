@@ -6,11 +6,14 @@ import RegistrationScreen from '../screens/Auth/RegistrationScreen';
 import LoginScreen from '../screens/Auth/LoginScreen';
 import ForgetPassword from '../screens/Auth/ForgetPassword';
 import GenderScreen from '../screens/Auth/GenderScreen';
-import { ComponentWrapper } from './ComponentWrapper';
+import {ComponentWrapper} from './ComponentWrapper';
 import NameScreen from '../screens/Auth/NameScreen';
 import Religion from '../screens/Auth/Religion';
 import BottomTabBar from './BottomTabBar';
 import Profile from '../screens/Profile';
+import EditProfile from '../screens/EditProfile';
+import Nearby from '../screens/Nearby';
+import Messsage from '../screens/Messsage';
 
 const Stack = createNativeStackNavigator();
 
@@ -54,9 +57,9 @@ const stackArray = [
   {
     name: 'Gender',
     component: props => (
-      // <ComponentWrapper>
+      <ComponentWrapper>
         <GenderScreen {...props} />
-      // </ComponentWrapper>
+      </ComponentWrapper>
     ),
     headerProps: {
       title: 'pro',
@@ -66,9 +69,9 @@ const stackArray = [
   {
     name: 'NameData',
     component: props => (
-      // <ComponentWrapper>
+      <ComponentWrapper>
         <NameScreen {...props} />
-      // </ComponentWrapper>
+      </ComponentWrapper>
     ),
     headerProps: {
       title: 'pro',
@@ -78,9 +81,9 @@ const stackArray = [
   {
     name: 'ReligionData',
     component: props => (
-      // <ComponentWrapper>
+      <ComponentWrapper>
         <Religion {...props} />
-      // </ComponentWrapper>
+      </ComponentWrapper>
     ),
     headerProps: {
       title: 'pro',
@@ -90,9 +93,9 @@ const stackArray = [
   {
     name: 'Registration',
     component: props => (
-      // <ComponentWrapper>
+      <ComponentWrapper>
         <RegistrationScreen {...props} />
-      // </ComponentWrapper>
+      </ComponentWrapper>
     ),
     headerProps: {
       title: 'pro',
@@ -102,9 +105,9 @@ const stackArray = [
   {
     name: 'ForgetPass',
     component: props => (
-      // <ComponentWrapper>
+      <ComponentWrapper>
         <ForgetPassword {...props} />
-      // </ComponentWrapper>
+      </ComponentWrapper>
     ),
     headerProps: {
       title: 'pro',
@@ -114,8 +117,44 @@ const stackArray = [
   {
     name: 'Profile',
     component: props => (
-      // <ComponentWrapper>
+      <ComponentWrapper>
         <Profile {...props} />
+      </ComponentWrapper>
+    ),
+    headerProps: {
+      title: 'pro',
+      showBack: false,
+    },
+  },
+  {
+    name: 'Edit_Profile',
+    component: props => (
+      <ComponentWrapper>
+        <EditProfile {...props} />
+      </ComponentWrapper>
+    ),
+    headerProps: {
+      title: 'pro',
+      showBack: false,
+    },
+  },
+  {
+    name: 'Near_by',
+    component: props => (
+      <ComponentWrapper>
+        <Nearby {...props} />
+      </ComponentWrapper>
+    ),
+    headerProps: {
+      title: 'pro',
+      showBack: false,
+    },
+  },
+  {
+    name: 'Message',
+    component: props => (
+      // <ComponentWrapper>
+        <Messsage {...props} />
       // </ComponentWrapper>
     ),
     headerProps: {

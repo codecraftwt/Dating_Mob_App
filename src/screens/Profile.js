@@ -37,7 +37,7 @@ const Profile = ({navigation}) => {
           label="edit profile"
           buttonColor={lightTheme.appColor}
           labelStyle={lightTheme.highlightTextColor}
-          //   onPress={goToEditProfile}
+          onPress={() => navigation.navigate('Edit_Profile')}
         />
       </View>
       <ScrollView>

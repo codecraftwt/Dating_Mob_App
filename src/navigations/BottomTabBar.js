@@ -1,27 +1,28 @@
 import * as React from 'react';
-import {
-  StyleSheet,
-  KeyboardAvoidingView,
-} from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {StyleSheet, KeyboardAvoidingView} from 'react-native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon2 from 'react-native-vector-icons/AntDesign';
+import Icon3 from 'react-native-vector-icons/Ionicons';
 // import Dashboard from '../Screens/Dashboard';
 // import { globalColors } from '../Theme/globalColors';
 // import VoterList from '../Screens/VoterList';
 // import UserProfile from '../Screens/UserProfile';
 // import Filters from '../Screens/Filters';
 // import AllMembers from '../Screens/AllMembers';
-import { w } from 'walstar-rn-responsive';
-import { useSelector } from 'react-redux';
-import { globalColors } from '../styles/globalColors';
+import {w} from 'walstar-rn-responsive';
+import {useSelector} from 'react-redux';
+import {globalColors} from '../styles/globalColors';
 import GenderScreen from '../screens/Auth/GenderScreen';
 import Profile from '../screens/Profile';
-
+import EditProfile from '../screens/EditProfile';
+import Nearby from '../screens/Nearby';
+import Messsage from '../screens/Messsage';
 
 const Tab = createBottomTabNavigator();
 
 export default function BottomTabBar(props) {
-//   const user = useSelector(state => state?.user?.data?.data);
+  //   const user = useSelector(state => state?.user?.data?.data);
 
   return (
     <>
@@ -32,8 +33,8 @@ export default function BottomTabBar(props) {
           gestureEnabled: false,
           tabBarStyle: {
             backgroundColor: globalColors.primaryTheme,
-            borderColor:globalColors.primaryTheme,
-            height:w(13)
+            borderColor: globalColors.primaryTheme,
+            height: w(13),
           },
         }}>
         <Tab.Screen
@@ -43,29 +44,61 @@ export default function BottomTabBar(props) {
             tabBarLabel: '',
             unmountOnBlur: true,
             tabBarIcon: ({focused}) => (
-              <Icon style={[styles.tabScreenImage, {color: focused ? globalColors.black : globalColors.white}]} name={'home'} />
+              <Icon
+                style={[
+                  styles.tabScreenImage,
+                  {color: focused ? globalColors.black : globalColors.white},
+                ]}
+                name={'home'}
+              />
             ),
           }}
         />
-        {/* {user?.role_id != 6 && */}
         <Tab.Screen
           name="Second"
           component={GenderScreen}
           options={{
             tabBarLabel: '',
             tabBarIcon: ({focused}) => (
-              <Icon style={[styles.tabScreenImage, {color: focused ? globalColors.black : globalColors.white}]} name={'card-account-details'} />
+              <Icon
+                style={[
+                  styles.tabScreenImage,
+                  {color: focused ? globalColors.black : globalColors.white},
+                ]}
+                name={'card-account-details'}
+              />
             ),
           }}
-        /> 
-        {/* } */}
+        />
         <Tab.Screen
           name="Third"
-          component={GenderScreen}
+          component={Messsage}
           options={{
             tabBarLabel: '',
             tabBarIcon: ({focused}) => (
-              <Icon style={[styles.tabScreenImage, {color: focused ? globalColors.black : globalColors.white}]} name={'account-group'} />
+              <Icon2
+                style={[
+                  styles.tabScreenImage,
+                  {color: focused ? globalColors.black : globalColors.white},
+                ]}
+                name={'message1'}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Fifth"
+          component={Nearby}
+          options={{
+            tabBarLabel: '',
+            tabBarIcon: ({focused}) => (
+              <Icon3
+                style={[
+                  styles.tabScreenImage,
+                  {color: focused ? globalColors.black : globalColors.white},
+                ]}
+                name={'heart-circle'}
+              />
             ),
           }}
         />
@@ -74,24 +107,19 @@ export default function BottomTabBar(props) {
           component={Profile}
           options={{
             tabBarLabel: '',
-            tabBarIcon: ({ focused }) => (
-              <Icon style={[styles.tabScreenImage, {color: focused ? globalColors.black : globalColors.white}]} name={'account-circle'} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Fifth"
-          component={GenderScreen}
-          options={{
-            tabBarLabel: '',
-            tabBarIcon: ({ focused }) => (
-              <Icon style={[styles.tabScreenImage, {color: focused ? globalColors.black : globalColors.white}]} name={'filter'} />
+            tabBarIcon: ({focused}) => (
+              <Icon
+                style={[
+                  styles.tabScreenImage,
+                  {color: focused ? globalColors.black : globalColors.white},
+                ]}
+                name={'account-circle'}
+              />
             ),
           }}
         />
       </Tab.Navigator>
-      <KeyboardAvoidingView>
-      </KeyboardAvoidingView>
+      <KeyboardAvoidingView></KeyboardAvoidingView>
     </>
   );
 }
