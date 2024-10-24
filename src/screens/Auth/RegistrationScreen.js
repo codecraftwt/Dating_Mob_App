@@ -24,6 +24,7 @@ import {
 } from '../../Redux/slices/UserRegisterSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import BackButton from '../../components/Common/BackButton';
+import Toast from 'react-native-toast-message';
 
 const {height, width} = Dimensions.get('window');
 
@@ -62,20 +63,21 @@ const RegistrationScreen = ({navigation}) => {
     await handleSignIn(mergedData);
   };
 
-  const handleSignIn = async (mergedData) => {
+  const handleSignIn = async mergedData => {
     try {
-      const response = await dispatch(registerUser(mergedData));
-
-      if (response.error) {
-        console.error('Registration failed:', response.error.message);
-        alert('Registration failed. Please try again.');
-      } else {
-        dispatch(clearRegistration());
-        navigation.navigate('SuccessScreen'); 
-      }
+      dispatch(registerUser(mergedData)).then(({payload}) => {
+        if (payload && payload.status == 201) {
+          dispatch(clearRegistration());
+          Toast.show({
+            type: 'success',
+            text1: 'Registration Successful',
+            position: 'bottom',
+          });
+          navigation.navigate('bottomtabbar');
+        }
+      });
     } catch (error) {
       console.error('Error during registration:', error);
-      alert('An error occurred during registration. Please try again.');
     }
   };
 
@@ -90,7 +92,7 @@ const RegistrationScreen = ({navigation}) => {
           source={require('../../assets/images/dual-tone.png')}
           style={styles.background}
           resizeMode="cover">
-         <BackButton navigation={navigation}/>
+          <BackButton navigation={navigation} />
           <View style={[styles.topContainer, styles.imageContainer]}>
             <Image
               source={require('../../assets/images/logo.png')}

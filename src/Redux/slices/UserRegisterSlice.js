@@ -32,8 +32,7 @@ export const registerUser = createAsyncThunk(
     try {
       const res = await axios.post(`${baseURL}signin`, registrationData);
       // await saveToken(res.data.data.token);
-      console.log(res.data,"res")
-      return res.data; // Adjust as per your API response
+      return res.status; // Adjust as per your API response
     } catch (error) {
       const errorMessage = error.response?.data?.message || error.message;
       return rejectWithValue(errorMessage);

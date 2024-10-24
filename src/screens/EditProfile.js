@@ -1,5 +1,6 @@
 import {
   ImageBackground,
+  KeyboardAvoidingView,
   ScrollView,
   StyleSheet,
   Text,
@@ -15,152 +16,158 @@ import {Image} from 'react-native-elements';
 
 const EditProfile = ({navigation}) => {
   return (
-    <View style={styles.mainContainer}>
-      <ImageBackground
-        source={require('../assets/images/profile.png')}
-        style={styles.imageStyle}>
-        <BackButton navigation={navigation} />
-        <View style={styles.centerContainer}>
-          <View style={styles.childContainer}>
-            <Image
-              source={require('../assets/images/new-profile.jpg')}
-              style={[
-                styles.logoImage,
-                {borderColor: lightTheme.backgroundColor},
-              ]}
-            />
-          </View>
-        </View>
-      </ImageBackground>
-      <View style={[styles.childContainer, styles.nexStyle]}>
-        <Text styleKey="textColor" style={styles.textStyle}>
-          profile Name
-        </Text>
-      </View>
-      <ScrollView>
-        <View
-          style={[
-            styles.backContainer,
-            styles.layoutContainer,
-            {marginTop: 40, backgroundColor: lightTheme.profileColor},
-          ]}>
-          <View style={[styles.leftContainer, styles.addContainer]}>
-            <Text styleKey="profileTextColor" style={styles.labelStyle}>
-              Name
+    <KeyboardAvoidingView
+      style={styles.mainContainer}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}>
+      <ScrollView
+        contentContainerStyle={{flexGrow: 1}}
+        keyboardShouldPersistTaps="handled"
+        automaticallyAdjustKeyboardInsets={true}>
+        <View style={styles.mainContainer}>
+          <ImageBackground
+            source={require('../assets/images/profile.png')}
+            style={styles.imageStyle}>
+            <BackButton navigation={navigation} />
+            <View style={styles.centerContainer}>
+              <View style={styles.childContainer}>
+                <Image
+                  source={require('../assets/images/new-profile.jpg')}
+                  style={[
+                    styles.logoImage,
+                    {borderColor: lightTheme.backgroundColor},
+                  ]}
+                />
+              </View>
+            </View>
+          </ImageBackground>
+          <View style={[styles.childContainer, styles.nexStyle]}>
+            <Text styleKey="textColor" style={styles.textStyle}>
+              profile Name
             </Text>
           </View>
-          <View style={[styles.centerContainer, styles.inputStyle]}>
-            <TextInput
-              placeholder="John manson"
-              placeholderTextColor={lightTheme.profileTextColor}
-              style={[
-                styles.textContainer,
-                {color: lightTheme.profileTextColor},
-              ]}
+          <View
+            style={[
+              styles.backContainer,
+              styles.layoutContainer,
+              {marginTop: 40, backgroundColor: lightTheme.profileColor},
+            ]}>
+            <View style={[styles.leftContainer, styles.addContainer]}>
+              <Text styleKey="profileTextColor" style={styles.labelStyle}>
+                Name
+              </Text>
+            </View>
+            <View style={[styles.centerContainer, styles.inputStyle]}>
+              <TextInput
+                placeholder="John manson"
+                placeholderTextColor={lightTheme.profileTextColor}
+                style={[
+                  styles.textContainer,
+                  {color: lightTheme.profileTextColor},
+                ]}
+              />
+            </View>
+          </View>
+          <View
+            style={[
+              styles.backContainer,
+              styles.layoutContainer,
+              {backgroundColor: lightTheme.profileColor},
+            ]}>
+            <View style={[styles.leftContainer, styles.addContainer]}>
+              <Text styleKey="profileTextColor" style={styles.labelStyle}>
+                UserName
+              </Text>
+            </View>
+            <View style={[styles.centerContainer, styles.inputStyle]}>
+              <TextInput
+                placeholder="Add username"
+                placeholderTextColor={lightTheme.profilePlaceholder}
+                style={[
+                  styles.textContainer,
+                  {color: lightTheme.profileTextColor},
+                ]}
+              />
+            </View>
+          </View>
+          <View
+            style={[
+              styles.backContainer,
+              styles.layoutContainer,
+              {backgroundColor: lightTheme.profileColor},
+            ]}>
+            <View style={[styles.leftContainer, styles.addContainer]}>
+              <Text styleKey="profileTextColor" style={styles.labelStyle}>
+                Gender
+              </Text>
+            </View>
+            <View style={[styles.centerContainer, styles.inputStyle]}>
+              <TextInput
+                placeholder="Male/Female"
+                placeholderTextColor={lightTheme.profilePlaceholder}
+                style={[
+                  styles.textContainer,
+                  {color: lightTheme.profileTextColor},
+                ]}
+              />
+            </View>
+          </View>
+          <View
+            style={[
+              styles.backContainer,
+              styles.layoutContainer,
+              {backgroundColor: lightTheme.profileColor},
+            ]}>
+            <View style={[styles.leftContainer, styles.addContainer]}>
+              <Text styleKey="profileTextColor" style={styles.labelStyle}>
+                Email
+              </Text>
+            </View>
+            <View style={[styles.centerContainer, styles.inputStyle]}>
+              <TextInput
+                placeholder="Johnmanson@gmail.com"
+                placeholderTextColor={lightTheme.profilePlaceholder}
+                style={[
+                  styles.textContainer,
+                  {color: lightTheme.profileTextColor},
+                ]}
+              />
+            </View>
+          </View>
+          <View
+            style={[
+              styles.backContainer,
+              styles.layoutContainer,
+              {backgroundColor: lightTheme.profileColor},
+            ]}>
+            <View style={[styles.leftContainer, styles.addContainer]}>
+              <Text styleKey="profileTextColor" style={styles.labelStyle}>
+                Phone
+              </Text>
+            </View>
+            <View style={[styles.centerContainer, styles.inputStyle]}>
+              <TextInput
+                placeholder="6358789523"
+                placeholderTextColor={lightTheme.profilePlaceholder}
+                style={[
+                  styles.textContainer,
+                  {color: lightTheme.profileTextColor},
+                ]}
+              />
+            </View>
+          </View>
+
+          <View style={[styles.childContainer, styles.extraContainer]}>
+            <RoundButton
+              buttonStyle={styles.inputLabel}
+              label="Save"
+              buttonColor={lightTheme.appColor}
+              labelStyle={lightTheme.highlightTextColor}
             />
           </View>
-        </View>
-        <View
-          style={[
-            styles.backContainer,
-            styles.layoutContainer,
-            {backgroundColor: lightTheme.profileColor},
-          ]}>
-          <View style={[styles.leftContainer, styles.addContainer]}>
-            <Text styleKey="profileTextColor" style={styles.labelStyle}>
-              UserName
-            </Text>
-          </View>
-          <View style={[styles.centerContainer, styles.inputStyle]}>
-            <TextInput
-              placeholder="Add username"
-              placeholderTextColor={lightTheme.profilePlaceholder}
-              style={[
-                styles.textContainer,
-                {color: lightTheme.profileTextColor},
-              ]}
-            />
-          </View>
-        </View>
-        <View
-          style={[
-            styles.backContainer,
-            styles.layoutContainer,
-            {backgroundColor: lightTheme.profileColor},
-          ]}>
-          <View style={[styles.leftContainer, styles.addContainer]}>
-            <Text styleKey="profileTextColor" style={styles.labelStyle}>
-              Gender
-            </Text>
-          </View>
-          <View style={[styles.centerContainer, styles.inputStyle]}>
-            <TextInput
-              placeholder="Male/Female"
-              placeholderTextColor={lightTheme.profilePlaceholder}
-              style={[
-                styles.textContainer,
-                {color: lightTheme.profileTextColor},
-              ]}
-            />
-          </View>
-        </View>
-        <View
-          style={[
-            styles.backContainer,
-            styles.layoutContainer,
-            {backgroundColor: lightTheme.profileColor},
-          ]}>
-          <View style={[styles.leftContainer, styles.addContainer]}>
-            <Text styleKey="profileTextColor" style={styles.labelStyle}>
-              Email
-            </Text>
-          </View>
-          <View style={[styles.centerContainer, styles.inputStyle]}>
-            <TextInput
-              placeholder="Johnmanson@gmail.com"
-              placeholderTextColor={lightTheme.profilePlaceholder}
-              style={[
-                styles.textContainer,
-                {color: lightTheme.profileTextColor},
-              ]}
-            />
-          </View>
-        </View>
-        <View
-          style={[
-            styles.backContainer,
-            styles.layoutContainer,
-            {backgroundColor: lightTheme.profileColor},
-          ]}>
-          <View style={[styles.leftContainer, styles.addContainer]}>
-            <Text styleKey="profileTextColor" style={styles.labelStyle}>
-              Phone
-            </Text>
-          </View>
-          <View style={[styles.centerContainer, styles.inputStyle]}>
-            <TextInput
-              placeholder="6358789523"
-              placeholderTextColor={lightTheme.profilePlaceholder}
-              style={[
-                styles.textContainer,
-                {color: lightTheme.profileTextColor},
-              ]}
-            />
-          </View>
-        </View>
-        {/* <lightThemeToggle updatelightTheme={updatelightTheme} /> */}
-        {/* <LanguageSelector updateLanguage={updateLanguage} /> */}
-        <View style={[styles.childContainer, styles.extraContainer]}>
-          <RoundButton
-            buttonStyle={styles.inputLabel}
-            label="Save"
-            buttonColor={lightTheme.appColor}
-            labelStyle={lightTheme.highlightTextColor}
-          />
         </View>
       </ScrollView>
-      {/* <FooterNavigation history={history} /> */}
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
