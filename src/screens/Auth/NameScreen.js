@@ -20,6 +20,7 @@ import {lightTheme} from '../../assets/themes';
 import {useDispatch} from 'react-redux'; // Add this to use dispatch
 import {setFields} from '../../Redux/slices/UserRegisterSlice';
 import BackButton from '../../components/Common/BackButton';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const {height, width} = Dimensions.get('window');
 
@@ -27,6 +28,8 @@ const NameScreen = ({navigation}) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [dob, setDob] = useState('');
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const dispatch = useDispatch(); // Initialize dispatch
 
   const goToNext = () => {
@@ -34,7 +37,7 @@ const NameScreen = ({navigation}) => {
       const formData = {
         firstName: firstName,
         lastName: lastName,
-        dateOfBirth: dob,
+        dob: dob,
       };
       // Dispatch the formData to Redux
       dispatch(setFields(formData));
@@ -42,6 +45,14 @@ const NameScreen = ({navigation}) => {
       navigation.navigate('ReligionData');
     } else {
       alert('Please fill all the fields');
+    }
+  };
+
+  const handleDateChange = (event, selectedDate) => {
+    setShowDatePicker(false); // Close the date picker when a date is selected
+    if (selectedDate) {
+      setSelectedDate(selectedDate);
+      setDob(selectedDate.toLocaleDateString()); // Format the date as needed (e.g., mm/dd/yyyy)
     }
   };
 
@@ -83,13 +94,27 @@ const NameScreen = ({navigation}) => {
             icon="form"
             choose={true}
           />
-          <Input
-            placeholder="Enter Date Of Birth"
-            onChangeText={text => setDob(text)}
-            value={dob}
-            icon="calendar"
-            choose={true}
-          />
+          <View style={styles.datePickerContainer}>
+            <Icon
+              name="calendar"
+              size={16}
+              color="#888"
+              onPress={() => setShowDatePicker(true)}
+            />
+            <Text style={styles.datePickerPlaceholder}>
+              {dob ? '' : 'Enter Date Of Birth'}
+            </Text>
+            <Text style={styles.selectedDateText}>{dob}</Text>
+          </View>
+          {showDatePicker && (
+            <DateTimePicker
+              value={selectedDate}
+              mode="date"
+              display="default"
+              onChange={handleDateChange}
+              maximumDate={new Date()} // Optionally limit date selection to today or earlier
+            />
+          )}
           <RoundButton
             buttonStyle={styles.signButton}
             label="Next"
@@ -175,5 +200,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 120,
     height: 120,
+  },
+  datePickerContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    // justifyContent: 'space-between',
+    // padding: 10,
+    width: '100%',
+    height: 50,
+    marginBottom: 20,
+    paddingTop:10,
+    backgroundColor: 'transparent',
+  },
+  datePickerPlaceholder: {
+    fontSize: 14,
+    color: '#aaa',
+    marginLeft:5
+  },
+  selectedDateText: {
+    fontSize: 14,
+    color: '#000',
+    marginLeft:5
   },
 });

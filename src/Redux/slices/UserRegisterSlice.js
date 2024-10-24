@@ -11,7 +11,7 @@ const initialState = {
     gender:'',
     firstName: '',
     lastName: '',
-    dateOfBirth:'',
+    dob:'',
     religion: '',
     motherTongue: '',
     country: '',
