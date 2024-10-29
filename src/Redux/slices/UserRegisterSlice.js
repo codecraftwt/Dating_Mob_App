@@ -1,8 +1,7 @@
 // store/registrationSlice.js
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { baseURL } from '../../utils/api';
 import { saveToken } from '../../utils/StorageUtils';
+import AxiosInstance from '../../utils/AxiosInstance'
 
 const initialState = {
   isLoading: false,
@@ -30,7 +29,7 @@ export const registerUser = createAsyncThunk(
   async (registrationData, { rejectWithValue }) => {
     console.log(registrationData,'registrationData')
     try {
-      const res = await axios.post(`${baseURL}signin`, registrationData);
+      const res = await AxiosInstance.post(`auth/signin`, registrationData);
       // await saveToken(res.data.data.token);
       return res.status; // Adjust as per your API response
     } catch (error) {

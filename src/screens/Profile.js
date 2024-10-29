@@ -6,15 +6,59 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import BackButton from '../components/Common/BackButton';
 import {Icon, Image} from 'react-native-elements';
 import {lightTheme} from '../assets/themes';
 import RoundButton from '../components/Common/RoundButton';
-// import {ScrollView} from 'native-base';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {getUserData} from '../utils/StorageUtils';
+import {useDispatch, useSelector} from 'react-redux';
+import {userProfile} from '../Redux/slices/ProfileSlice';
+import {logoutUser} from '../Redux/slices/UserSlice';
+import Toast from 'react-native-toast-message';
 
 const Profile = ({navigation}) => {
+  const dispatch = useDispatch();
+  const [userData, setUserData] = useState(null);
+  const user = useSelector(state => state?.profile?.profileData?.data?.user);
+
+  console.log(user,'user')
+
+  const fetchUserData = async () => {
+    try {
+      const userdata = await getUserData();
+      const userdataa = JSON.parse(userdata);
+      setUserData(userdataa || {});
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  useEffect(() => {
+    if (userData && userData._id) {
+      dispatch(userProfile(userData._id))
+    }
+  }, [userData, dispatch]);
+
+  const handleLogout = () => {
+    console.log('handleLogout');
+    dispatch(logoutUser()).then(({payload}) => {
+      if (payload.status == 200) {
+        Toast.show({
+          type: 'success',
+          text1: payload.message,
+          position: 'bottom',
+        });
+        navigation.navigate('LoginSelect');
+      }
+    });
+  };
+
   return (
     <View style={styles.mainContainer}>
       <ImageBackground
@@ -126,11 +170,13 @@ const Profile = ({navigation}) => {
               style={styles.iconImage}
             />
           </View>
-          <View style={styles.rightContainer}>
+          <TouchableOpacity
+            style={styles.rightContainer}
+            onPress={handleLogout}>
             <Text styleKey="inputColor" style={styles.textStyle}>
               Sign Out
             </Text>
-          </View>
+          </TouchableOpacity>
         </TouchableOpacity>
       </ScrollView>
       {/* <FooterNavigation history={history} /> */}

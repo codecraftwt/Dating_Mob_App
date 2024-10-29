@@ -1,11 +1,12 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import axios from 'axios';
-import {baseURL} from '../../utils/api';
-import {saveToken} from '../../utils/StorageUtils';
+import {saveToken, saveUserData} from '../../utils/StorageUtils';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import AxiosInstance from '../../utils/AxiosInstance';
 
 const initialState = {
   isLoading: false,
-  data: {},
+  loginData: [],
+  logoutData: [],
   error: null,
 };
 
@@ -14,9 +15,9 @@ export const loginUser = createAsyncThunk(
   async ({data}, {rejectWithValue}) => {
     console.log(data, 'loginUser checking api call');
     try {
-      const res = await axios.post(`${baseURL}login`, data);
-      console.log(res, 'response from login api');
-      // await saveToken(res.data.data.token);
+      const res = await AxiosInstance.post(`auth/login`, data);
+      await saveToken(res.data.data.token);
+      await saveUserData(res.data.data.user);
       return res.data;
     } catch (error) {
       const errorMessage = error.response?.data?.message || error.message;
@@ -26,13 +27,27 @@ export const loginUser = createAsyncThunk(
   },
 );
 
+export const logoutUser = createAsyncThunk(
+  'user/logoutUser',
+  async (_, {rejectWithValue}) => {
+    try {
+      const res = await AxiosInstance.get(`auth/signout`, null);
+      await AsyncStorage.clear();
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  },
+);
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
     clearStore: state => {
-      state.data = {};
-      state.error = null; // Clear errors as well when clearing the store
+      state.loginData = [];
+      state.logoutData = [];
+      state.error = null;
     },
   },
   extraReducers: builder => {
@@ -43,11 +58,23 @@ const userSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.data = action.payload;
+        state.loginData = action.payload;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload; // Capture the error message
+        state.error = action.payload;
+      })
+      .addCase(logoutUser.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(logoutUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.logoutData = action.payload;
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
       });
   },
 });
@@ -55,3 +82,12 @@ const userSlice = createSlice({
 export const {clearStore} = userSlice.actions;
 
 export default userSlice.reducer;
+
+export const loginUserWithToken = (navigate, token) => async dispatch => {
+  if (token) {
+    // navigate("/ordersystem");
+    console.log('token');
+  } else {
+    console.log('token is not available');
+  }
+};

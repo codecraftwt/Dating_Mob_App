@@ -8,13 +8,41 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import BackButton from '../components/Common/BackButton';
 import {lightTheme} from '../assets/themes';
 import RoundButton from '../components/Common/RoundButton';
 import {Image} from 'react-native-elements';
+import {useDispatch, useSelector} from 'react-redux';
+import {getUserData} from '../utils/StorageUtils';
+import {userProfile} from '../Redux/slices/ProfileSlice';
 
 const EditProfile = ({navigation}) => {
+  const dispatch = useDispatch();
+  const [userData, setUserData] = useState(null);
+  const user = useSelector(state => state?.profile?.profileData?.data?.user);
+  console.log(user, 'user');
+
+  const fetchUserData = async () => {
+    try {
+      const userdata = await getUserData();
+      const userdataa = JSON.parse(userdata);
+      setUserData(userdataa || {});
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  useEffect(() => {
+    if (userData && userData._id) {
+      dispatch(userProfile(userData._id));
+    }
+  }, [userData, dispatch]);
+
   return (
     <KeyboardAvoidingView
       style={styles.mainContainer}
@@ -43,14 +71,14 @@ const EditProfile = ({navigation}) => {
           </ImageBackground>
           <View style={[styles.childContainer, styles.nexStyle]}>
             <Text styleKey="textColor" style={styles.textStyle}>
-              profile Name
+              {user.firstName}
             </Text>
           </View>
           <View
             style={[
               styles.backContainer,
               styles.layoutContainer,
-              {marginTop: 40, backgroundColor: lightTheme.profileColor},
+              {marginTop: 20, backgroundColor: lightTheme.profileColor},
             ]}>
             <View style={[styles.leftContainer, styles.addContainer]}>
               <Text styleKey="profileTextColor" style={styles.labelStyle}>
@@ -64,8 +92,9 @@ const EditProfile = ({navigation}) => {
                 style={[
                   styles.textContainer,
                   {color: lightTheme.profileTextColor},
-                ]}
-              />
+                ]}>
+                {user.firstName} {user.lastName}
+              </TextInput>
             </View>
           </View>
           <View
@@ -86,8 +115,9 @@ const EditProfile = ({navigation}) => {
                 style={[
                   styles.textContainer,
                   {color: lightTheme.profileTextColor},
-                ]}
-              />
+                ]}>
+                {user.email}
+              </TextInput>
             </View>
           </View>
           <View
@@ -108,8 +138,9 @@ const EditProfile = ({navigation}) => {
                 style={[
                   styles.textContainer,
                   {color: lightTheme.profileTextColor},
-                ]}
-              />
+                ]}>
+                {user.gender}
+              </TextInput>
             </View>
           </View>
           <View
@@ -130,8 +161,9 @@ const EditProfile = ({navigation}) => {
                 style={[
                   styles.textContainer,
                   {color: lightTheme.profileTextColor},
-                ]}
-              />
+                ]}>
+                {user.email}
+              </TextInput>
             </View>
           </View>
           <View
@@ -152,8 +184,9 @@ const EditProfile = ({navigation}) => {
                 style={[
                   styles.textContainer,
                   {color: lightTheme.profileTextColor},
-                ]}
-              />
+                ]}>
+                {user.mobile}
+              </TextInput>
             </View>
           </View>
 
@@ -193,7 +226,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   addContainer: {
-    flex: 2,
+    flex: 1.5,
   },
   textContainer: {
     height: 45,
@@ -277,7 +310,7 @@ const styles = StyleSheet.create({
     paddingBottom: 70,
   },
   nexStyle: {
-    marginTop: 100,
+    marginTop: 60,
   },
   specialText: {
     fontSize: 22,

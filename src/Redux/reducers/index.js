@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux';
 import userLoginReducer from '../slices/UserSlice';
 import registrationSlice from '../slices/UserRegisterSlice';
+import userProfile from '../slices/ProfileSlice';
 
 export const rootReducer = combineReducers({
-    user: userLoginReducer,
-    userRegister:registrationSlice
+  userRegister: registrationSlice,
+  user: userLoginReducer,
+  profile: userProfile,
 });

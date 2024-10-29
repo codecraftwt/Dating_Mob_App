@@ -1,1 +1,1 @@
-export const baseURL = 'https://backend-dating-gamma.vercel.app/api/auth/';    
+export const baseURL = 'https://backend-dating-gamma.vercel.app/api/';    

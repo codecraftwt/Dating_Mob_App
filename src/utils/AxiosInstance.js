@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { baseURL } from './api';
+import { getToken } from './StorageUtils';
 // import { getToken } from './StorageUtils';
 
 const instance = axios.create({
@@ -8,10 +9,10 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   async config => {
-    // const token = await getToken();
-    // if (token) {
-    //   config.headers.Authorization = `Bearer ${token}`;
-    // }
+    const token = await getToken();
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
   },
   error => {

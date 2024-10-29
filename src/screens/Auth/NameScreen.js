@@ -44,10 +44,10 @@ const NameScreen = ({navigation}) => {
   };
 
   const handleDateChange = (event, selectedDate) => {
-    setShowDatePicker(false); // Close the date picker when a date is selected
+    setShowDatePicker(false);
     if (selectedDate) {
       setSelectedDate(selectedDate);
-      setDob(selectedDate.toLocaleDateString()); // Format the date as needed (e.g., mm/dd/yyyy)
+      setDob(selectedDate.toLocaleDateString());
     }
   };
 
