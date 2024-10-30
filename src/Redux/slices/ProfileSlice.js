@@ -43,7 +43,7 @@ export const editUserProfile = createAsyncThunk(
 );
 
 const profileSlice = createSlice({
-  name: 'registration',
+  name: 'profile',
   initialState,
   reducers: {
     clearStore: state => {
@@ -81,6 +81,6 @@ const profileSlice = createSlice({
   },
 });
 
-export const {setFields, clearRegistration} = profileSlice.actions;
+export const {clearStore} = profileSlice.actions;
 
 export default profileSlice.reducer;
