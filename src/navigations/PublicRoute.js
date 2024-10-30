@@ -15,6 +15,7 @@ import EditProfile from '../screens/EditProfile';
 import Nearby from '../screens/Nearby';
 import Messsage from '../screens/Messsage';
 import Calling from '../screens/Calling';
+import RecentVisitors from '../screens/RecentVisitors';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,7 +24,7 @@ const stackArray = [
     name: 'LoginSelect',
     component: props => (
       // <ComponentWrapper>
-        <SplashScreen {...props} />
+      <SplashScreen {...props} />
       // </ComponentWrapper>
     ),
     headerProps: {
@@ -35,7 +36,7 @@ const stackArray = [
     name: 'Login',
     component: props => (
       // <ComponentWrapper>
-        <LoginScreen {...props} />
+      <LoginScreen {...props} />
       // </ComponentWrapper>
     ),
     headerProps: {
@@ -47,7 +48,7 @@ const stackArray = [
     name: 'bottomtabbar',
     component: props => (
       // <ComponentWrapper>
-        <BottomTabBar {...props} />
+      <BottomTabBar {...props} />
       // </ComponentWrapper>
     ),
     headerProps: {
@@ -55,6 +56,7 @@ const stackArray = [
       showBack: false,
     },
   },
+
   {
     name: 'Gender',
     component: props => (
@@ -140,22 +142,10 @@ const stackArray = [
     },
   },
   {
-    name: 'Near_by',
-    component: props => (
-      <ComponentWrapper>
-        <Nearby {...props} />
-      </ComponentWrapper>
-    ),
-    headerProps: {
-      title: 'pro',
-      showBack: false,
-    },
-  },
-  {
     name: 'Message',
     component: props => (
       // <ComponentWrapper>
-        <Messsage {...props} />
+      <Messsage {...props} />
       // </ComponentWrapper>
     ),
     headerProps: {
@@ -167,7 +157,31 @@ const stackArray = [
     name: 'Calling',
     component: props => (
       // <ComponentWrapper>
-        <Calling {...props} />
+      <Calling {...props} />
+      // </ComponentWrapper>
+    ),
+    headerProps: {
+      title: 'pro',
+      showBack: false,
+    },
+  },
+  {
+    name: 'Near_by',
+    component: props => (
+      // <ComponentWrapper>
+      <Nearby {...props} />
+      // </ComponentWrapper>
+    ),
+    headerProps: {
+      title: 'pro',
+      showBack: false,
+    },
+  },
+  {
+    name: 'Recent_Visitors',
+    component: props => (
+      // <ComponentWrapper>
+      <RecentVisitors {...props} />
       // </ComponentWrapper>
     ),
     headerProps: {
@@ -188,7 +202,7 @@ export const PublicRoute = props => {
   return (
     <Stack.Navigator
       screenOptions={{gestureEnabled: false}}
-      initialRouteName="renderStartScreen">
+      initialRouteName="LoginSelect">
       {stackArray.map((item, index) => {
         const isHeader = true;
         return (

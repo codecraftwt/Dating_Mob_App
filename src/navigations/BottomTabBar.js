@@ -13,6 +13,8 @@ import EditProfile from '../screens/EditProfile';
 import Nearby from '../screens/Nearby';
 import Messsage from '../screens/Messsage';
 import Calling from '../screens/Calling';
+import TopTabBar from './TopTabBar';
+import TopTabBarScreen from '../screens/Auth/TopTabBarScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -83,7 +85,7 @@ export default function BottomTabBar(props) {
         />
         <Tab.Screen
           name="Fifth"
-          component={Nearby}
+          component={TopTabBarScreen}
           options={{
             tabBarLabel: '',
             tabBarIcon: ({focused}) => (
