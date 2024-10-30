@@ -15,11 +15,19 @@ import RoundButton from '../components/Common/RoundButton';
 import {Image} from 'react-native-elements';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUserData} from '../utils/StorageUtils';
-import {userProfile} from '../Redux/slices/ProfileSlice';
+import {editUserProfile, userProfile} from '../Redux/slices/ProfileSlice';
+import {number} from 'prop-types';
 
 const EditProfile = ({navigation}) => {
   const dispatch = useDispatch();
   const [userData, setUserData] = useState(null);
+
+  const [name, setName] = useState('');
+  const [userName, setUserName] = useState('');
+  const [gender, setGender] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+
   const user = useSelector(state => state?.profile?.profileData?.data?.user);
   console.log(user, 'user');
 
@@ -42,6 +50,55 @@ const EditProfile = ({navigation}) => {
       dispatch(userProfile(userData._id));
     }
   }, [userData, dispatch]);
+
+  const handleSave = () => {
+    const payload = {};
+
+    const fields = [
+      {key: 'firstName', newValue: name, oldValue: user.firstName},
+      {key: 'userName', newValue: userName, oldValue: user.userName},
+      {key: 'gender', newValue: gender, oldValue: user.gender},
+      {key: 'email', newValue: email, oldValue: user.email},
+      {key: 'mobile', newValue: phone, oldValue: user.mobile},
+    ];
+
+    fields.forEach(field => {
+      switch (field.key) {
+        case 'firstName':
+          if (field.newValue !== field.oldValue && name != '')
+            payload.firstName = field.newValue;
+          break;
+        case 'userName':
+          if (field.newValue !== field.oldValue && userName != '')
+            payload.userName = field.newValue;
+          break;
+        case 'gender':
+          if (field.newValue !== field.oldValue && gender != '')
+            payload.gender = field.newValue;
+          break;
+        case 'email':
+          if (field.newValue !== field.oldValue && email != '')
+             payload.email = field.newValue;
+          break;
+        case 'mobile':
+          if (field.newValue !== field.oldValue && phone != '')
+            payload.mobile = field.newValue;
+          break;
+        default:
+          break;
+      }
+    });
+
+    if (Object.keys(payload).length > 0) {
+      dispatch(editUserProfile({id: userData._id, payload})).then(
+        ({payload}) => {
+          console.log(payload, 'payload');
+        },
+      );
+    } else {
+      console.log('No changes detected');
+    }
+  };
 
   return (
     <KeyboardAvoidingView
@@ -87,6 +144,7 @@ const EditProfile = ({navigation}) => {
             </View>
             <View style={[styles.centerContainer, styles.inputStyle]}>
               <TextInput
+                onChangeText={text => setName(text)}
                 placeholder="John manson"
                 placeholderTextColor={lightTheme.profileTextColor}
                 style={[
@@ -110,6 +168,7 @@ const EditProfile = ({navigation}) => {
             </View>
             <View style={[styles.centerContainer, styles.inputStyle]}>
               <TextInput
+                onChangeText={text => setUserName(text)}
                 placeholder="Add username"
                 placeholderTextColor={lightTheme.profilePlaceholder}
                 style={[
@@ -133,6 +192,7 @@ const EditProfile = ({navigation}) => {
             </View>
             <View style={[styles.centerContainer, styles.inputStyle]}>
               <TextInput
+                onChangeText={text => setGender(text)}
                 placeholder="Male/Female"
                 placeholderTextColor={lightTheme.profilePlaceholder}
                 style={[
@@ -156,6 +216,7 @@ const EditProfile = ({navigation}) => {
             </View>
             <View style={[styles.centerContainer, styles.inputStyle]}>
               <TextInput
+                onChangeText={text => setEmail(text)}
                 placeholder="Johnmanson@gmail.com"
                 placeholderTextColor={lightTheme.profilePlaceholder}
                 style={[
@@ -179,6 +240,7 @@ const EditProfile = ({navigation}) => {
             </View>
             <View style={[styles.centerContainer, styles.inputStyle]}>
               <TextInput
+                onChangeText={text => setPhone(text)}
                 placeholder="6358789523"
                 placeholderTextColor={lightTheme.profilePlaceholder}
                 style={[
@@ -192,6 +254,7 @@ const EditProfile = ({navigation}) => {
 
           <View style={[styles.childContainer, styles.extraContainer]}>
             <RoundButton
+              onPress={handleSave}
               buttonStyle={styles.inputLabel}
               label="Save"
               buttonColor={lightTheme.appColor}

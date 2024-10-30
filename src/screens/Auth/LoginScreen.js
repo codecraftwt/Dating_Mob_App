@@ -28,8 +28,8 @@ const {height, width} = Dimensions.get('window');
 const LoginScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const isLoading = useSelector(state => state?.user?.isLoading);
-  const [email, setEmail] = useState('trupti02@yopmail.com');
-  const [password, setPassword] = useState('Trupti@123');
+  const [email, setEmail] = useState('akashpatil12345@gmail.com');
+  const [password, setPassword] = useState('12345');
   const [errors, setErrors] = useState({
     email: '',
     password: '',
