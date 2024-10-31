@@ -1,9 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, Image, StyleSheet, FlatList} from 'react-native';
+import React, {useEffect, useState, useCallback} from 'react';
+import {View, Text, Image, StyleSheet, FlatList, ImageBackground} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {visitorsInfo} from '../Redux/slices/Visitors';
 import {lightTheme} from '../assets/themes';
 import {getUserData} from '../utils/StorageUtils';
+import {useFocusEffect} from '@react-navigation/native';
+
+const ImagePath = require('../assets/images/payment.png');
 
 export default function VisitedUsersScreen() {
   const dispatch = useDispatch();
@@ -23,33 +26,40 @@ export default function VisitedUsersScreen() {
     }
   };
 
+  // Fetch user data when the component mounts
   useEffect(() => {
     fetchUserData();
   }, []);
 
-  useEffect(() => {
-    if (userData && userData._id) {
-      dispatch(visitorsInfo(userData._id)).then(({payload}) => {
-        console.log(payload, 'payload from userData fetching');
-      });
-    }
-  }, [userData, dispatch]);
+  useFocusEffect(
+    useCallback(() => {
+      if (userData && userData._id) {
+        dispatch(visitorsInfo(userData._id)).then(({payload}) => {
+          console.log(payload, 'payload from userData fetching');
+        });
+      }
+    }, [userData, dispatch]),
+  );
 
   const renderUserItem = ({item}) => {
-    console.log(item,'item from renderUserItem')
+    console.log(item, 'item from renderUserItem');
     return (
-      <View style={styles.wrapContainer}>
-        <View style={[styles.topContainer, styles.imageContainer]}>
-          <Image
-            source={require('../assets/images/logo.png')}
-            style={styles.logoImage}
-          />
+      // <ImageBackground source={ImagePath} style={styles.imageStyle}>
+        <View style={styles.wrapContainer}>
+          <View style={[styles.topContainer, styles.imageContainer]}>
+            <Image
+              source={require('../assets/images/logo.png')}
+              style={styles.logoImage}
+            />
+          </View>
+          <View style={[styles.topContainer, styles.titleContainer]}>
+            <Text style={[styles.textStyle, styles.titleStyle]}>
+              {item.visitor.firstName}
+            </Text>
+            <Text style={styles.infoStyle}>visited to your profile.</Text>
+          </View>
         </View>
-        <View style={[styles.topContainer, styles.titleContainer]}>
-          <Text style={[styles.textStyle, styles.titleStyle]}>{item.visitor.firstName}</Text>
-          <Text style={styles.infoStyle}>visited your profile</Text>
-        </View>
-      </View>
+      // </ImageBackground>
     );
   };
 
@@ -64,12 +74,18 @@ export default function VisitedUsersScreen() {
 }
 
 const styles = StyleSheet.create({
+  imageStyle: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+  },
   wrapContainer: {
     flexDirection: 'row',
-    paddingVertical: 10,
+    paddingVertical: 8,
     paddingHorizontal: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
+    // borderBottomWidth: 1,
+    // borderBottomColor: '#ddd',
   },
   topContainer: {
     flexDirection: 'row',
@@ -91,10 +107,10 @@ const styles = StyleSheet.create({
   },
   infoStyle: {
     fontSize: 16,
-    fontWeight:'bold',
+    fontWeight: 'bold',
     color: lightTheme.textColor,
     marginTop: 5,
-    paddingLeft:5
+    paddingLeft: 5,
   },
   contentContainer: {
     paddingBottom: 20,

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PublicRoute } from './PublicRoute';
+import {PublicRoute} from './PublicRoute';
 
 
 const Navigation = props => {

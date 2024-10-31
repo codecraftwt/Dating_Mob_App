@@ -19,7 +19,6 @@ const Nearby = ({navigation}) => {
   return (
     <View style={styles.mainContainer}>
       <ImageBackground source={ImagePath} style={styles.imageStyle}>
-        {/* <BackButton navigation={navigation} /> */}
         <View style={styles.centerContainer}>
           <View style={styles.childContainer}>
             <View style={styles.leftContainer}>

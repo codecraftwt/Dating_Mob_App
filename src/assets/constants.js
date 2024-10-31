@@ -1,7 +1,7 @@
 export const defaultConfig = {
     constants: {
-      selectedTheme: ThemeKey.light,
-      selectedLanguage: LanguageKey.en,
+      // selectedTheme: ThemeKey.light,
+      // selectedLanguage: LanguageKey.en,
       defaultTheme: "Dark Theme",
       defaultLanguage: "Default language",
       title: "RECRAFT DATING",

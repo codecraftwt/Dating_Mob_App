@@ -16,6 +16,8 @@ import Nearby from '../screens/Nearby';
 import Messsage from '../screens/Messsage';
 import Calling from '../screens/Calling';
 import RecentVisitors from '../screens/RecentVisitors';
+import Matching from '../screens/Matching';
+import Matched from '../screens/Matched';
 
 const Stack = createNativeStackNavigator();
 
@@ -182,6 +184,30 @@ const stackArray = [
     component: props => (
       // <ComponentWrapper>
       <RecentVisitors {...props} />
+      // </ComponentWrapper>
+    ),
+    headerProps: {
+      title: 'pro',
+      showBack: false,
+    },
+  },
+  {
+    name: 'Matching',
+    component: props => (
+      // <ComponentWrapper>
+      <Matching {...props} />
+      // </ComponentWrapper>
+    ),
+    headerProps: {
+      title: 'pro',
+      showBack: false,
+    },
+  },
+  {
+    name: 'Matched',
+    component: props => (
+      // <ComponentWrapper>
+      <Matched {...props} />
       // </ComponentWrapper>
     ),
     headerProps: {

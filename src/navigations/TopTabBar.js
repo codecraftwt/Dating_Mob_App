@@ -3,6 +3,7 @@ import Nearby from '../screens/Nearby';
 import RecentVisitors from '../screens/RecentVisitors';
 import BackButton from '../components/Common/BackButton';
 import {View} from 'react-native';
+import { globalColors } from '../styles/globalColors';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -11,9 +12,12 @@ export default function TopTabBar({navigation}) {
     <Tab.Navigator
       screenOptions={{
         tabBarLabelStyle: {fontSize: 16, fontWeight: 'bold'},
-        tabBarStyle: {backgroundColor: 'lightblue'},
-        tabBarActiveTintColor: 'blue',
-        tabBarInactiveTintColor: 'gray',
+        tabBarStyle: {
+          backgroundColor: globalColors.primaryTheme,
+          borderColor: globalColors.primaryTheme,
+        },
+        tabBarActiveTintColor: globalColors.black,
+        tabBarInactiveTintColor: globalColors.white,
       }}>
       <Tab.Screen
         name="Nearby"

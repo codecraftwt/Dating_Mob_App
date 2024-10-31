@@ -15,6 +15,8 @@ import Messsage from '../screens/Messsage';
 import Calling from '../screens/Calling';
 import TopTabBar from './TopTabBar';
 import TopTabBarScreen from '../screens/Auth/TopTabBarScreen';
+import Matching from '../screens/Matching';
+import Matched from '../screens/Matched';
 
 const Tab = createBottomTabNavigator();
 
@@ -36,7 +38,7 @@ export default function BottomTabBar(props) {
         }}>
         <Tab.Screen
           name="First"
-          component={GenderScreen}
+          component={Matching}
           options={{
             tabBarLabel: '',
             unmountOnBlur: true,
@@ -53,7 +55,7 @@ export default function BottomTabBar(props) {
         />
         <Tab.Screen
           name="Second"
-          component={Calling}
+          component={Matched}
           options={{
             tabBarLabel: '',
             tabBarIcon: ({focused}) => (
