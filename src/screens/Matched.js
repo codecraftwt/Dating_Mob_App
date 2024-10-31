@@ -91,8 +91,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 10,
     paddingRight: 10,
-    marginTop: 80,
-    marginBottom: 20,
+    marginTop: 20,
+    // marginBottom: 20,
   },
   bottomContainer: {
     flex: 1,
@@ -176,8 +176,8 @@ const styles = StyleSheet.create({
     right: 15,
   },
   nexStyle: {
-    marginTop: 80,
-    marginBottom: 30,
+    marginTop: 20,
+    // marginBottom: 30,
   },
   specialText: {
     fontSize: 32,
