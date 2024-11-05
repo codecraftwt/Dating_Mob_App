@@ -20,11 +20,10 @@ const boy = require('../assets/images/new-boy.jpg');
 const Matched = ({navigation}) => {
   return (
     <View style={styles.mainContainer}>
-      <ScrollView>
         <ImageBackground source={ImagePath} style={styles.imageStyle}>
           <BackButton navigation={navigation} />
           <View style={[styles.topContainer, styles.nexStyle]}>
-            <Text style={[styles.textStyle, styles.specialText]}>matched</Text>
+            <Text style={[styles.textStyle, styles.specialText]}>Its a Match!</Text>
           </View>
           <View style={styles.bottomContainer}>
             <View style={styles.bottomContent}>
@@ -41,13 +40,13 @@ const Matched = ({navigation}) => {
           </View>
           <View style={styles.childContainer}>
             <Text style={[styles.forgotPassword, styles.messageContent]}>
-              Matching
+              You and Jessica have liked each other
             </Text>
           </View>
         </ImageBackground>
         <RoundButton
           buttonStyle={styles.inputLabel}
-          label='Matching'
+          label='Send Message'
           buttonColor={lightTheme.appColor}
           labelStyle={lightTheme.highlightTextColor}
           //   onPress={goToSearching}
@@ -58,12 +57,11 @@ const Matched = ({navigation}) => {
             styles.title,
             {borderColor: lightTheme.inputColor},
           ]}
-          label='Matching'
+          label='Send Gifts'
           buttonColor={lightTheme.backgroundColor}
           labelStyle={lightTheme.appColor}
           //   onPress={goToCalling}
         />
-      </ScrollView>
       {/* <FooterNavigation history={history} /> */}
     </View>
   );
@@ -98,6 +96,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'flex-start',
     flexDirection: 'row',
+    paddingTop:15,
   },
   backContainer: {
     flexDirection: 'row',
@@ -180,11 +179,13 @@ const styles = StyleSheet.create({
     // marginBottom: 30,
   },
   specialText: {
-    fontSize: 32,
+    fontSize: 24,
+    color:lightTheme.highlightTextColor,
+    textTransform: "uppercase"
   },
   imageStyle: {
     width: '100%',
-    height: 480,
+    height: 380,
   },
   bottomContent: {
     flex: 1,
@@ -194,6 +195,7 @@ const styles = StyleSheet.create({
     width: 180,
     fontWeight: 'bold',
     textAlign: 'center',
-    paddingBottom: 20,
+    paddingBottom: 10,
+    color:lightTheme.highlightTextColor
   },
 });

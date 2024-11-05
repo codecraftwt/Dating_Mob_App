@@ -9,8 +9,8 @@ import React from 'react';
 import Swiper from 'react-native-deck-swiper';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import BackButton from '../components/Common/BackButton';
-import { Image } from 'react-native-elements';
-import { lightTheme } from '../assets/themes';
+import {Image} from 'react-native-elements';
+import {lightTheme} from '../assets/themes';
 
 const ImagePath = require('../assets/images/payment.png');
 const cross = require('../assets/images/cross.png');
@@ -18,26 +18,30 @@ const chat = require('../assets/images/chat.png');
 const heart = require('../assets/images/heart.png');
 const cardImage = require('../assets/images/new-card.jpg');
 
-const Matching = ({ navigation }) => {
+const Matching = ({navigation}) => {
   return (
     <View style={styles.mainContainer}>
       <ImageBackground source={ImagePath} style={styles.imageStyle}>
         <BackButton navigation={navigation} />
         <View style={styles.topContainer}>
-          <Text style={[styles.textStyle, styles.titleStyle]}>
-            matching
-          </Text>
+          <Text style={[styles.textStyle, styles.titleStyle]}>matching</Text>
         </View>
         <View style={styles.contentContainer}>
           <Swiper
-            cards={['Abraham', 'Abraham', 'Abraham', 'WHAT', 'MAKES', 'YOU', 'HAPPY']}
+            cards={[
+              'Abraham',
+              'Abraham',
+              'Abraham',
+              'WHAT',
+              'MAKES',
+              'YOU',
+              'HAPPY',
+            ]}
             renderCard={(card, cardIndex) => {
               return (
                 <View key={`${card}-${cardIndex}`} style={styles.card}>
                   <Image source={cardImage} style={styles.imageCard} />
-                  <Text style={styles.text}>
-                    {card}
-                  </Text>
+                  <Text style={styles.text}>{card}</Text>
                   <View style={styles.childContainer}>
                     <TouchableOpacity>
                       <View style={styles.cardIcon}>
@@ -51,7 +55,7 @@ const Matching = ({ navigation }) => {
                     </TouchableOpacity>
                     <TouchableOpacity>
                       <View style={styles.cardContent}>
-                        <Text style={{ fontWeight: 'bold', textAlign: 'center' }}>
+                        <Text style={{fontWeight: 'bold', textAlign: 'center'}}>
                           26
                         </Text>
                       </View>
@@ -60,7 +64,7 @@ const Matching = ({ navigation }) => {
                 </View>
               );
             }}
-            onSwiped={(cardIndex) => console.log(cardIndex)}
+            onSwiped={cardIndex => console.log(cardIndex)}
             onSwipedAll={() => console.log('onSwipedAll')}
             cardIndex={0}
             useViewOverflow={Platform.OS === 'ios'}
@@ -76,7 +80,7 @@ const Matching = ({ navigation }) => {
             </TouchableOpacity>
           </View>
           <View style={styles.iconContainer}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Matched')}>
               <Image source={chat} style={styles.specialStyle} />
             </TouchableOpacity>
           </View>
