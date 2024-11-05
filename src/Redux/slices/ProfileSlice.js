@@ -29,7 +29,6 @@ export const userProfile = createAsyncThunk(
 export const editUserProfile = createAsyncThunk(
   'registration/editUserProfile',
   async ({id, payload}, {rejectWithValue}) => {
-    console.log(id, 'id from editUserProfile');
     console.log(payload, 'payload from editUserProfile');
     try {
       const res = await AxiosInstance.put(`user/${id}`, payload);

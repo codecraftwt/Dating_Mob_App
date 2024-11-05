@@ -1,6 +1,7 @@
 import {
   ImageBackground,
   KeyboardAvoidingView,
+  Modal,
   ScrollView,
   StyleSheet,
   Text,
@@ -17,6 +18,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getUserData} from '../utils/StorageUtils';
 import {editUserProfile, userProfile} from '../Redux/slices/ProfileSlice';
 import {number} from 'prop-types';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import FeatherIcon from 'react-native-vector-icons/Feather';
 
 const EditProfile = ({navigation}) => {
   const dispatch = useDispatch();
@@ -27,6 +30,9 @@ const EditProfile = ({navigation}) => {
   const [gender, setGender] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+
+  const [imageUri, setImageUri] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   const user = useSelector(state => state?.profile?.profileData?.data?.user);
   console.log(user, 'user');
@@ -51,10 +57,40 @@ const EditProfile = ({navigation}) => {
     }
   }, [userData, dispatch]);
 
+  const handleImageSelect = async type => {
+    const options = {
+      mediaType: 'photo',
+      quality: 1,
+    };
+
+    try {
+      if (type === 'camera') {
+        const result = await launchCamera(options);
+        if (!result.didCancel && result.assets) {
+          setImageUri(result.assets[0].uri);
+        }
+      } else if (type === 'gallery') {
+        const result = await launchImageLibrary(options);
+        if (!result.didCancel && result.assets) {
+          setImageUri(result.assets[0].uri);
+        }
+      }
+    } catch (error) {
+      console.error('Error selecting image:', error);
+    } finally {
+      setShowModal(false);
+    }
+  };
+
   const handleSave = () => {
     const payload = {};
 
     const fields = [
+      {
+        key: 'profilePhoto',
+        newValue: imageUri,
+        oldValue: user.profilePhoto,
+      },
       {key: 'firstName', newValue: name, oldValue: user.firstName},
       {key: 'userName', newValue: userName, oldValue: user.userName},
       {key: 'gender', newValue: gender, oldValue: user.gender},
@@ -64,6 +100,10 @@ const EditProfile = ({navigation}) => {
 
     fields.forEach(field => {
       switch (field.key) {
+        case 'profilePhoto':
+          if (field.newValue !== field.oldValue && imageUri != '')
+            payload.profilePhoto = field.newValue;
+          break;
         case 'firstName':
           if (field.newValue !== field.oldValue && name != '')
             payload.firstName = field.newValue;
@@ -78,7 +118,7 @@ const EditProfile = ({navigation}) => {
           break;
         case 'email':
           if (field.newValue !== field.oldValue && email != '')
-             payload.email = field.newValue;
+            payload.email = field.newValue;
           break;
         case 'mobile':
           if (field.newValue !== field.oldValue && phone != '')
@@ -105,32 +145,41 @@ const EditProfile = ({navigation}) => {
       style={styles.mainContainer}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}>
-      <ScrollView
-        contentContainerStyle={{flexGrow: 1}}
-        keyboardShouldPersistTaps="handled"
-        automaticallyAdjustKeyboardInsets={true}>
-        <View style={styles.mainContainer}>
-          <ImageBackground
-            source={require('../assets/images/profile.png')}
-            style={styles.imageStyle}>
-            <BackButton navigation={navigation} />
-            <View style={styles.centerContainer}>
-              <View style={styles.childContainer}>
-                <Image
-                  source={require('../assets/images/new-profile.jpg')}
-                  style={[
-                    styles.logoImage,
-                    {borderColor: lightTheme.backgroundColor},
-                  ]}
+      <View style={styles.mainContainer}>
+        <ImageBackground
+          source={require('../assets/images/profile.png')}
+          style={styles.imageStyle}>
+          <BackButton navigation={navigation} />
+          <View style={styles.centerContainer}>
+            <View style={styles.childContainer}>
+              <Image
+                source={
+                  user.profilePhoto
+                    ? {uri: user.profilePhoto}
+                    : require('../assets/images/new-profile.jpg')
+                }
+                style={[
+                  styles.logoImage,
+                  {borderColor: lightTheme.backgroundColor},
+                ]}
+              />
+              <TouchableOpacity onPress={() => setShowModal(true)}>
+                <FeatherIcon
+                  name="camera"
+                  size={35}
+                  color={lightTheme.textColor}
+                  style={styles.cameraIcon}
                 />
-              </View>
+              </TouchableOpacity>
             </View>
-          </ImageBackground>
-          <View style={[styles.childContainer, styles.nexStyle]}>
-            <Text styleKey="textColor" style={styles.textStyle}>
-              {user.firstName}
-            </Text>
           </View>
+        </ImageBackground>
+        <View style={[styles.childContainer, styles.nexStyle]}>
+          <Text styleKey="textColor" style={styles.textStyle}>
+            {user.firstName}
+          </Text>
+        </View>
+        <ScrollView>
           <View
             style={[
               styles.backContainer,
@@ -256,13 +305,29 @@ const EditProfile = ({navigation}) => {
             <RoundButton
               onPress={handleSave}
               buttonStyle={styles.inputLabel}
-              label="Save"
+              label="Save Changes"
               buttonColor={lightTheme.appColor}
               labelStyle={lightTheme.highlightTextColor}
             />
           </View>
+        </ScrollView>
+      </View>
+      <Modal transparent={true} visible={showModal} animationType="slide">
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Choose an Option</Text>
+            <TouchableOpacity onPress={() => handleImageSelect('camera')}>
+              <Text style={styles.optionText}>Take Photo</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => handleImageSelect('gallery')}>
+              <Text style={styles.optionText}>Choose from Gallery</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setShowModal(false)}>
+              <Text style={styles.cancelText}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </ScrollView>
+      </Modal>
     </KeyboardAvoidingView>
   );
 };
@@ -348,10 +413,13 @@ const styles = StyleSheet.create({
   Icon: {
     paddingLeft: 30,
   },
-  backIcon: {
-    fontSize: 25,
-    paddingTop: 20,
-    paddingLeft: 25,
+  cameraIcon: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    backgroundColor: lightTheme.backgroundColor,
+    borderRadius: 50,
+    padding: 5,
   },
   logoImage: {
     justifyContent: 'center',
@@ -390,4 +458,18 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     marginTop: 20,
   },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 20,
+    margin: 40,
+    borderRadius: 10,
+  },
+  modalTitle: {fontSize: 18, fontWeight: 'bold', marginBottom: 20},
+  optionText: {fontSize: 16, marginVertical: 10},
+  cancelText: {fontSize: 16, color: 'red', marginTop: 20, textAlign: 'center'},
 });
