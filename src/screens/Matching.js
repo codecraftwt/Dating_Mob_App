@@ -117,10 +117,12 @@ const styles = StyleSheet.create({
   titleStyle: {
     fontSize: 32,
     textTransform: 'capitalize',
+    color:lightTheme.highlightTextColor
   },
   contentContainer: {
     flex: 1,
     justifyContent: 'center',
+    marginTop: -20, 
   },
   card: {
     borderRadius: 40,
