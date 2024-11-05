@@ -7,6 +7,7 @@ const initialState = {
   isLoading: false,
   visitorsData: [],
   visitedData: [],
+  likedData:[],
   error: null,
 };
 
@@ -42,6 +43,21 @@ export const visitedInfo = createAsyncThunk(
   },
 );
 
+export const likedInfo = createAsyncThunk(
+  'visitors/likedInfo',
+  async ({payload}, {rejectWithValue}) => {
+    console.log(payload, 'payload from likedInfo');
+    try {
+      const res = await AxiosInstance.post(`likes/like-profile`, payload);
+      return res;
+    } catch (error) {
+      console.log(error, 'error');
+      const errorMessage = error.response?.data?.message || error.message;
+      return rejectWithValue(errorMessage);
+    }
+  },
+);
+
 const visitorSlice = createSlice({
   name: 'visitors',
   initialState,
@@ -49,6 +65,7 @@ const visitorSlice = createSlice({
     clearStore: state => {
       state.visitorsData = [];
       state.visitedData = [];
+      state.likedData = [];
       state.error = null;
     },
   },
@@ -75,6 +92,18 @@ const visitorSlice = createSlice({
         state.visitedData = action.payload;
       })
       .addCase(visitedInfo.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(likedInfo.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(likedInfo.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.likedData = action.payload;
+      })
+      .addCase(likedInfo.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });

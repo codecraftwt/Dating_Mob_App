@@ -11,6 +11,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import BackButton from '../components/Common/BackButton';
 import {Image} from 'react-native-elements';
 import {lightTheme} from '../assets/themes';
+import {useDispatch} from 'react-redux';
 
 const ImagePath = require('../assets/images/payment.png');
 const cross = require('../assets/images/cross.png');
@@ -19,6 +20,11 @@ const heart = require('../assets/images/heart.png');
 const cardImage = require('../assets/images/new-card.jpg');
 
 const Matching = ({navigation}) => {
+  const dispatch = useDispatch();
+
+  const likeProfile = () => {
+    console.log('liked profile');
+  };
   return (
     <View style={styles.mainContainer}>
       <ImageBackground source={ImagePath} style={styles.imageStyle}>
@@ -85,7 +91,7 @@ const Matching = ({navigation}) => {
             </TouchableOpacity>
           </View>
           <View style={styles.iconContainer}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={likeProfile}>
               <Image source={heart} style={styles.logoImage} />
             </TouchableOpacity>
           </View>
@@ -117,12 +123,12 @@ const styles = StyleSheet.create({
   titleStyle: {
     fontSize: 32,
     textTransform: 'capitalize',
-    color:lightTheme.highlightTextColor
+    color: lightTheme.highlightTextColor,
   },
   contentContainer: {
     flex: 1,
     justifyContent: 'center',
-    marginTop: -20, 
+    marginTop: -20,
   },
   card: {
     borderRadius: 40,
@@ -150,7 +156,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   iconContainer: {
-    margin: 12,
+    margin: 14,
     minWidth: 50,
     height: 50,
     borderRadius: 50,
