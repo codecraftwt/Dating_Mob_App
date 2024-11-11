@@ -16,6 +16,7 @@ export const loginUser = createAsyncThunk(
     console.log(data, 'loginUser checking api call');
     try {
       const res = await AxiosInstance.post(`auth/login`, data);
+      console.log(res.data.data.token,'tokennnn')
       await saveToken(res.data.data.token);
       await saveUserData(res.data.data.user);
       return res.data;

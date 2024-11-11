@@ -62,9 +62,9 @@ const stackArray = [
   {
     name: 'Gender',
     component: props => (
-      <ComponentWrapper>
+      // <ComponentWrapper>
         <GenderScreen {...props} />
-      </ComponentWrapper>
+      // </ComponentWrapper>
     ),
     headerProps: {
       title: 'pro',
@@ -74,9 +74,9 @@ const stackArray = [
   {
     name: 'NameData',
     component: props => (
-      <ComponentWrapper>
+      // <ComponentWrapper>
         <NameScreen {...props} />
-      </ComponentWrapper>
+      // </ComponentWrapper>
     ),
     headerProps: {
       title: 'pro',
@@ -86,9 +86,9 @@ const stackArray = [
   {
     name: 'ReligionData',
     component: props => (
-      <ComponentWrapper>
+      // <ComponentWrapper>
         <Religion {...props} />
-      </ComponentWrapper>
+      // </ComponentWrapper>
     ),
     headerProps: {
       title: 'pro',
@@ -98,9 +98,9 @@ const stackArray = [
   {
     name: 'Registration',
     component: props => (
-      <ComponentWrapper>
+      // <ComponentWrapper>
         <RegistrationScreen {...props} />
-      </ComponentWrapper>
+      // </ComponentWrapper>
     ),
     headerProps: {
       title: 'pro',
@@ -110,9 +110,9 @@ const stackArray = [
   {
     name: 'ForgetPass',
     component: props => (
-      <ComponentWrapper>
+      // <ComponentWrapper>
         <ForgetPassword {...props} />
-      </ComponentWrapper>
+      // </ComponentWrapper>
     ),
     headerProps: {
       title: 'pro',
@@ -122,9 +122,9 @@ const stackArray = [
   {
     name: 'Profile',
     component: props => (
-      <ComponentWrapper>
+      // <ComponentWrapper>
         <Profile {...props} />
-      </ComponentWrapper>
+      // </ComponentWrapper>
     ),
     headerProps: {
       title: 'pro',
@@ -134,9 +134,9 @@ const stackArray = [
   {
     name: 'Edit_Profile',
     component: props => (
-      <ComponentWrapper>
+      // <ComponentWrapper>
         <EditProfile {...props} />
-      </ComponentWrapper>
+      // </ComponentWrapper>
     ),
     headerProps: {
       title: 'pro',

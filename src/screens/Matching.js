@@ -5,13 +5,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import Swiper from 'react-native-deck-swiper';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import BackButton from '../components/Common/BackButton';
 import {Image} from 'react-native-elements';
 import {lightTheme} from '../assets/themes';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {matchedInfo} from '../Redux/slices/VisitorSlice';
 
 const ImagePath = require('../assets/images/payment.png');
 const cross = require('../assets/images/cross.png');
@@ -21,6 +22,13 @@ const cardImage = require('../assets/images/new-card.jpg');
 
 const Matching = ({navigation}) => {
   const dispatch = useDispatch();
+  const matchingInformation = useSelector(state => state?.visitor?.matchedData);
+
+  console.log(matchingInformation, 'matchingInformation');
+
+  useEffect(() => {
+    dispatch(matchedInfo());
+  }, []);
 
   const likeProfile = () => {
     console.log('liked profile');

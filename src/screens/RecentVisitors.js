@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useCallback} from 'react';
 import {View, Text, Image, StyleSheet, FlatList, ImageBackground} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {visitorsInfo} from '../Redux/slices/Visitors';
+import {visitorsInfo} from '../Redux/slices/VisitorSlice';
 import {lightTheme} from '../assets/themes';
 import {getUserData} from '../utils/StorageUtils';
 import {useFocusEffect} from '@react-navigation/native';
