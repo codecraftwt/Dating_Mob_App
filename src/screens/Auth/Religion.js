@@ -4,17 +4,10 @@ import {
   ImageBackground,
   ScrollView,
   Text,
-  TextInput,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import {useState} from 'react';
-import Icon from 'react-native-vector-icons/Ionicons';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import {StyleSheet} from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Input from '../../components/Common/Input';
 import RoundButton from '../../components/Common/RoundButton';
 import {lightTheme} from '../../assets/themes';
 import {Dropdown} from 'react-native-element-dropdown';

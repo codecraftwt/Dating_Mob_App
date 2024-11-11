@@ -26,18 +26,14 @@ const Messsage = ({navigation}) => {
   return (
     <View style={styles.mainContainer}>
       <ImageBackground source={ImagePath} style={styles.imageStyle}>
-        <BackButton navigation={navigation} />
         <View style={styles.centerContainer}>
-          <View style={styles.childContainer}>
-            <View style={styles.leftContainer}>
-              <Text style={styles.leftStyle} styleKey="highlightTextColor">
-                message
-              </Text>
-            </View>
+          <BackButton navigation={navigation} />
+          <Text style={styles.leftStyle} styleKey="highlightTextColor">
+            message
+          </Text>
+          <View style={styles.rightContainer}>
+            <Image source={search} style={styles.searchStyle} />
           </View>
-        </View>
-        <View style={styles.rightContainer}>
-          <Image source={search} style={styles.searchStyle} />
         </View>
       </ImageBackground>
       <ScrollView style={{marginBottom: 40}}>
@@ -103,13 +99,15 @@ const styles = StyleSheet.create({
   },
   rightContainer: {
     flex: 0,
-    justifyContent: 'flex-end',
     paddingRight: 20,
+    paddingTop: 20,
   },
   centerContainer: {
     flex: 3,
     justifyContent: 'center',
-    paddingTop: 20,
+    paddingTop: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   backContainer: {
     flexDirection: 'row',
@@ -124,10 +122,6 @@ const styles = StyleSheet.create({
     fontSize: 25,
     paddingTop: 20,
     paddingLeft: 20,
-  },
-  childContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
   },
   imageStyle: {
     width: '100%',
@@ -150,7 +144,8 @@ const styles = StyleSheet.create({
   leftStyle: {
     fontSize: 20,
     textAlign: 'left',
-    paddingRight: 10,
+    paddingTop: 20,
+    paddingRight: 30,
     fontWeight: 'bold',
   },
 });
