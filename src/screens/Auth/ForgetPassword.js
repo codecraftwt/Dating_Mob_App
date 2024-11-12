@@ -6,15 +6,16 @@ import {
   View,
   Image,
 } from 'react-native';
-import {useState} from 'react';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import {StyleSheet} from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import RoundButton from '../../components/Common/RoundButton';
 import {lightTheme} from '../../assets/themes';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import BackButton from '../../components/Common/BackButton';
+import {
+  horizontalScale,
+  moderateScale,
+  verticalScale,
+} from '../../utils/Responsive';
 
 const {height, width} = Dimensions.get('window');
 
@@ -30,7 +31,7 @@ const ForgetPassword = ({navigation}) => {
           <View style={[styles.topContainer, styles.extraStyle]}>
             <View style={[styles.forgetContainer, {backgroundColor: '#fff'}]}>
               <Image
-                source={require('../../assets/images/dual-tone.png')}
+                source={require('../../assets/images/app-logo.png')}
                 style={styles.logoImage}
               />
             </View>
@@ -117,74 +118,74 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   forgetContainer: {
-    width: 100,
-    height: 100,
+    width: horizontalScale(80),
+    height: verticalScale(100),
     alignContent: 'center',
-    paddingLeft: 25,
+    paddingLeft: horizontalScale(15),
     justifyContent: 'center',
-    borderRadius: 50,
+    borderRadius: moderateScale(50),
   },
   topContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginTop: 80,
-    marginBottom: 20,
+    paddingLeft: horizontalScale(10),
+    paddingRight: horizontalScale(10),
+    marginTop: verticalScale(80),
+    marginBottom: verticalScale(20),
   },
   logoImage: {
     justifyContent: 'center',
-    width: 50,
-    height: 50,
+    width: horizontalScale(50),
+    height: verticalScale(40),
   },
   extraStyle: {
-    marginTop: 120,
-    marginBottom: 10,
+    marginTop: verticalScale(120),
+    marginBottom: verticalScale(10),
   },
   textStyle: {
-    fontSize: 16,
+    fontSize: moderateScale(16),
     fontWeight: 'bold',
   },
   textStyle2: {
-    fontSize: 16,
+    fontSize: moderateScale(16),
     fontWeight: 'bold',
     color: lightTheme.highlightTextColor,
   },
   specialText: {
-    fontSize: 32,
+    fontSize: moderateScale(32),
     textTransform: 'capitalize',
     color: '#ffffff',
   },
   nexStyle: {
     marginTop: 0,
-    marginBottom: 30,
+    marginBottom: verticalScale(30),
   },
   button: {
     backgroundColor: '#FF0000',
-    padding: 8,
-    borderRadius: 20,
+    padding: moderateScale(8),
+    borderRadius: moderateScale(20),
     alignItems: 'center',
-    marginVertical: 10,
-    minWidth: 200,
+    marginVertical: verticalScale(10),
+    minWidth: moderateScale(200),
   },
   buttonContainer: {
     width: '100%',
-    paddingHorizontal: 20,
-    marginBottom: 20,
+    paddingHorizontal: horizontalScale(20),
+    marginBottom: verticalScale(20),
   },
   inputLabel: {
-    minWidth: 230,
-    marginTop: 0,
+    minWidth: moderateScale(230),
+    marginTop: verticalScale(0),
   },
   childContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
   },
   forgotPassword: {
-    marginTop: 10,
-    marginBottom: 15,
-    fontSize: 16,
+    marginTop: verticalScale(10),
+    marginBottom: verticalScale(15),
+    fontSize: moderateScale(16),
     alignSelf: 'flex-start',
     alignContent: 'flex-start',
     alignItems: 'flex-start',
@@ -195,14 +196,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   iconContainer: {
-    margin: 12,
-    minWidth: 50,
-    height: 50,
-    borderRadius: 50,
+    margin: moderateScale(12),
+    minWidth: moderateScale(50),
+    height: verticalScale(60),
+    borderRadius: moderateScale(50),
   },
   Icon: {
-    fontSize: 25,
-    padding: 15,
+    fontSize: moderateScale(25),
+    padding: moderateScale(14),
     justifyContent: 'center',
   },
   bottomContent: {
@@ -211,6 +212,6 @@ const styles = StyleSheet.create({
   },
   imageStyle: {
     width: '100%',
-    height: 550,
+    height: moderateScale(550),
   },
 });

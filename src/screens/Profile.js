@@ -17,13 +17,14 @@ import {useDispatch, useSelector} from 'react-redux';
 import {userProfile} from '../Redux/slices/ProfileSlice';
 import {logoutUser} from '../Redux/slices/UserSlice';
 import Toast from 'react-native-toast-message';
+import {horizontalScale, moderateScale, verticalScale} from '../utils/Responsive';
 
 const Profile = ({navigation}) => {
   const dispatch = useDispatch();
   const [userData, setUserData] = useState(null);
   const user = useSelector(state => state?.profile?.profileData?.data?.user);
 
-  console.log(user,'user')
+  console.log(user, 'user');
 
   const fetchUserData = async () => {
     try {
@@ -41,7 +42,7 @@ const Profile = ({navigation}) => {
 
   useEffect(() => {
     if (userData && userData._id) {
-      dispatch(userProfile(userData._id))
+      dispatch(userProfile(userData._id));
     }
   }, [userData, dispatch]);
 
@@ -194,18 +195,18 @@ const styles = StyleSheet.create({
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
-    paddingRight: 50,
+    paddingRight: horizontalScale(50),
   },
   backContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   inputLabel: {
-    minWidth: 160,
-    paddingTop: 10,
-    minHeight: 20,
-    marginTop: 0,
-    borderRadius: 50,
+    minWidth: horizontalScale(160),
+    paddingTop: verticalScale(10),
+    minHeight: verticalScale(20),
+    marginTop: verticalScale(0),
+    borderRadius: moderateScale(50),
     // marginBottom: 40,
   },
   childContainer: {
@@ -219,54 +220,54 @@ const styles = StyleSheet.create({
   rightContainer: {
     flex: 3,
     justifyContent: 'center',
-    paddingTop: 17,
-    paddingLeft: 5,
+    paddingTop: verticalScale(17),
+    paddingLeft: horizontalScale(5),
   },
   title: {
-    marginLeft: 30,
-    marginRight: 50,
-    paddingBottom: 10,
+    marginLeft: horizontalScale(30),
+    marginRight: horizontalScale(50),
+    paddingBottom: verticalScale(10),
   },
   Icon: {
-    paddingLeft: 30,
+    paddingLeft: horizontalScale(30),
   },
   backIcon: {
-    fontSize: 25,
-    paddingTop: 20,
-    paddingLeft: 25,
+    fontSize: moderateScale(25),
+    paddingTop: verticalScale(20),
+    paddingLeft: horizontalScale(25),
   },
   logoImage: {
     justifyContent: 'center',
-    width: 150,
-    height: 150,
-    borderWidth: 5,
-    borderRadius: 150,
-    marginTop: 100,
+    width: horizontalScale(120),
+    height: verticalScale(150),
+    borderWidth: moderateScale(2),
+    borderRadius: moderateScale(150),
+    marginTop: verticalScale(130),
   },
   textStyle: {
-    fontSize: 22,
+    fontSize: moderateScale(22),
     fontWeight: 'bold',
-    paddingLeft: 10,
+    paddingLeft: horizontalScale(10),
   },
   extraStyle: {
-    paddingBottom: 70,
+    paddingBottom: verticalScale(70),
   },
   nexStyle: {
-    marginTop: 100,
+    marginTop: verticalScale(100),
   },
   specialText: {
-    fontSize: 22,
+    fontSize: moderateScale(22),
     fontWeight: 'bold',
     textTransform: 'capitalize',
   },
   imageStyle: {
     width: '100%',
-    height: 230,
+    height: verticalScale(275),
   },
   iconImage: {
-    width: 20,
-    height: 20,
-    marginLeft: 30,
-    marginTop: 20,
+    width: horizontalScale(20),
+    height: verticalScale(20),
+    marginLeft: horizontalScale(30),
+    marginTop: verticalScale(20),
   },
 });

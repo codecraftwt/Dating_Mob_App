@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
+import { horizontalScale, moderateScale, verticalScale } from '../utils/Responsive';
 
 const SplashScreen = () => {
   const navigation = useNavigation();
@@ -57,44 +58,44 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-end',
-    paddingBottom: 50,
+    paddingBottom: verticalScale(50),
     alignItems: 'center',
   },
   title: {
-    fontSize: 28,
+    fontSize: moderateScale(28),
     color: '#fff',
-    marginBottom: 20,
+    marginBottom: verticalScale(20),
     fontStyle: 'italic',
   },
   buttonContainer: {
     width: '100%',
-    paddingHorizontal: 20,
-    marginBottom: 20,
+    paddingHorizontal: horizontalScale(20),
+    marginBottom: verticalScale(20),
   },
   button: {
     backgroundColor: '#FF0000',
-    padding: 8,
-    borderRadius: 20,
+    padding: moderateScale(8),
+    borderRadius: moderateScale(20),
     alignItems: 'center',
-    marginVertical: 10,
-    minWidth: 200,
+    marginVertical: verticalScale(10),
+    minWidth: horizontalScale(200),
   },
   button2: {
     backgroundColor: '#ffffff',
-    padding: 8,
-    borderRadius: 20,
+    padding: moderateScale(8),
+    borderRadius: moderateScale(20),
     alignItems: 'center',
-    marginVertical: 10,
-    minWidth: 200,
+    marginVertical: verticalScale(10),
+    minWidth: horizontalScale(200),
   },
   buttonText: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: moderateScale(16),
     fontWeight: 'bold',
   },
   buttonText2: {
     color: '#000',
-    fontSize: 16,
+    fontSize: moderateScale(16),
     fontWeight: 'bold',
   },
   rightContainer: {
@@ -103,11 +104,11 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'center',
     alignContent: 'flex-end',
-    paddingRight: 30,
-    paddingLeft: 40,
+    paddingRight: horizontalScale(30),
+    paddingLeft: horizontalScale(40),
   },
   sloganContainer: {
-    width: 245,
-    paddingTop: 50,
+    width: horizontalScale(245),
+    paddingTop: verticalScale(50),
   },
 });

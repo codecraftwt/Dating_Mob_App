@@ -16,6 +16,11 @@ import {useDispatch} from 'react-redux'; // Add this to use dispatch
 import {setFields} from '../../Redux/slices/UserRegisterSlice';
 import BackButton from '../../components/Common/BackButton';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import {
+  horizontalScale,
+  moderateScale,
+  verticalScale,
+} from '../../utils/Responsive';
 
 const {height, width} = Dimensions.get('window');
 
@@ -25,7 +30,7 @@ const NameScreen = ({navigation}) => {
   const [dob, setDob] = useState('');
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
 
   const goToNext = () => {
     if (firstName && lastName && dob) {
@@ -139,82 +144,80 @@ const styles = StyleSheet.create({
     top: height * 0.45,
     width: '80%',
     alignSelf: 'center',
-    padding: 20,
+    padding: moderateScale(20),
     backgroundColor: 'white',
-    borderRadius: 25,
+    borderRadius: moderateScale(25),
     elevation: 5,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.2,
-    shadowRadius: 2,
+    shadowRadius: moderateScale(2),
   },
   signInText: {
-    fontSize: 16,
+    fontSize: moderateScale(16),
     fontWeight: 'bold',
   },
   input: {
     width: '100%',
-    height: 50,
+    height: verticalScale(50),
     borderWidth: 1,
     borderColor: 'gray',
-    borderRadius: 10,
-    paddingHorizontal: 10,
-    marginBottom: 10,
+    borderRadius: moderateScale(10),
+    paddingHorizontal: horizontalScale(10),
+    marginBottom: verticalScale(10),
   },
   signButton: {
-    minWidth: 230,
-    marginTop: 40,
+    minWidth: horizontalScale(230),
+    marginTop: verticalScale(40),
   },
   imageContainer: {
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: verticalScale(10),
+    marginBottom: verticalScale(10),
   },
   titleContainer: {
-    marginTop: 0,
-    marginBottom: 30,
+    marginTop: verticalScale(0),
+    marginBottom: verticalScale(30),
   },
   textStyle: {
-    fontSize: 16,
+    fontSize: moderateScale(16),
     fontWeight: 'bold',
     color: lightTheme.highlightTextColor,
   },
   titleStyle: {
-    fontSize: 32,
+    fontSize: moderateScale(32),
     textTransform: 'capitalize',
   },
   topContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginTop: 80,
-    marginBottom: 20,
+    paddingLeft: horizontalScale(10),
+    paddingRight: horizontalScale(10),
+    marginTop: verticalScale(80),
+    marginBottom: verticalScale(20),
   },
   logoImage: {
     justifyContent: 'center',
-    width: 120,
-    height: 120,
+    width: horizontalScale(120),
+    height: verticalScale(155),
   },
   datePickerContainer: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    // justifyContent: 'space-between',
-    // padding: 10,
     width: '100%',
-    height: 50,
-    marginBottom: 20,
-    paddingTop:10,
+    height: verticalScale(50),
+    marginBottom: verticalScale(20),
+    paddingTop: verticalScale(10),
     backgroundColor: 'transparent',
   },
   datePickerPlaceholder: {
-    fontSize: 14,
+    fontSize: moderateScale(14),
     color: '#aaa',
-    marginLeft:5
+    marginLeft: horizontalScale(5),
   },
   selectedDateText: {
-    fontSize: 14,
+    fontSize: moderateScale(14),
     color: '#000',
-    marginLeft:5
+    marginLeft: horizontalScale(5),
   },
 });

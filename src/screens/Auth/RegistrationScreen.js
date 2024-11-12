@@ -25,6 +25,11 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import BackButton from '../../components/Common/BackButton';
 import Toast from 'react-native-toast-message';
+import {
+  horizontalScale,
+  moderateScale,
+  verticalScale,
+} from '../../utils/Responsive';
 
 const {height, width} = Dimensions.get('window');
 
@@ -193,27 +198,27 @@ const styles = StyleSheet.create({
     top: height * 0.35,
     width: '80%',
     alignSelf: 'center',
-    padding: 20,
+    padding: moderateScale(20),
     backgroundColor: 'white',
-    borderRadius: 25,
+    borderRadius: moderateScale(25),
     elevation: 5,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
+    shadowOpacity: moderateScale(0.2),
+    shadowRadius: moderateScale(2),
   },
   signInText: {
-    fontSize: 16,
+    fontSize: moderateScale(16),
     fontWeight: 'bold',
   },
   input: {
     width: '100%',
-    height: 50,
-    borderWidth: 1,
+    height: verticalScale(50),
+    borderWidth: moderateScale(1),
     borderColor: 'gray',
-    borderRadius: 10,
+    borderRadius: moderateScale(10),
     paddingHorizontal: 10,
-    marginBottom: 10,
+    marginBottom: verticalScale(10),
   },
   passwordContainer: {
     flexDirection: 'row',
@@ -222,16 +227,16 @@ const styles = StyleSheet.create({
   passwordInput: {
     flex: 1,
     height: '100%',
-    paddingHorizontal: 10,
+    paddingHorizontal: horizontalScale(10),
   },
   icon: {
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 10,
+    padding: moderateScale(10),
   },
   text: {
-    marginTop: 20,
-    fontSize: 16,
+    marginTop: verticalScale(20),
+    fontSize: moderateScale(16),
     textAlign: 'center',
   },
   linkText: {
@@ -239,11 +244,11 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
   searchContainer: {
-    borderBottomWidth: 0.5,
+    borderBottomWidth: horizontalScale(0.5),
     flexDirection: 'row',
     alignItems: 'center',
     // paddingTop: 10,
-    paddingBottom: 0,
+    paddingBottom: verticalScale(0),
   },
   iconStyle: {
     flex: 0,
@@ -251,29 +256,29 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 2,
-    height: 35,
-    paddingLeft: 10,
-    marginTop: 5,
+    height: verticalScale(35),
+    paddingLeft: horizontalScale(10),
+    marginTop: verticalScale(5),
   },
   button2: {
     backgroundColor: '#FF0000',
-    padding: 8,
-    borderRadius: 20,
+    padding: moderateScale(8),
+    borderRadius: moderateScale(20),
     alignItems: 'center',
-    marginVertical: 10,
-    minWidth: 200,
+    marginVertical: verticalScale(10),
+    minWidth: horizontalScale(200),
   },
   buttonText2: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: moderateScale(16),
     fontWeight: 'bold',
   },
   forgetStyle: {
     fontWeight: 'bold',
     textAlign: 'right',
-    marginTop: 10,
-    marginBottom: 15,
-    fontSize: 12,
+    marginTop: verticalScale(10),
+    marginBottom: verticalScale(15),
+    fontSize: moderateScale(12),
   },
   forgetContainer: {
     alignSelf: 'flex-end',
@@ -281,46 +286,46 @@ const styles = StyleSheet.create({
   },
   checkContainer: {
     borderBottomWidth: 0,
-    paddingTop: 10,
+    paddingTop: verticalScale(10),
   },
   signButton: {
-    minWidth: 230,
-    marginTop: 40,
+    minWidth: horizontalScale(230),
+    marginTop: verticalScale(40),
   },
   backContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingLeft: 20,
+    paddingLeft: horizontalScale(20),
   },
   imageContainer: {
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: verticalScale(10),
+    marginBottom: verticalScale(10),
   },
   titleContainer: {
-    marginTop: 0,
-    marginBottom: 30,
+    marginTop: verticalScale(0),
+    marginBottom: verticalScale(30),
   },
   textStyle: {
-    fontSize: 16,
+    fontSize: moderateScale(16),
     fontWeight: 'bold',
     color: lightTheme.highlightTextColor,
   },
   titleStyle: {
-    fontSize: 32,
+    fontSize: moderateScale(32),
     textTransform: 'capitalize',
   },
   topContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginTop: 80,
-    marginBottom: 20,
+    paddingLeft: horizontalScale(10),
+    paddingRight: horizontalScale(10),
+    marginTop: verticalScale(80),
+    marginBottom: verticalScale(20),
   },
   logoImage: {
     justifyContent: 'center',
-    width: 120,
-    height: 120,
+    width: horizontalScale(120),
+    height: verticalScale(155),
   },
 });

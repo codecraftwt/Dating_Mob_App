@@ -5,6 +5,7 @@ import {visitorsInfo} from '../Redux/slices/VisitorSlice';
 import {lightTheme} from '../assets/themes';
 import {getUserData} from '../utils/StorageUtils';
 import {useFocusEffect} from '@react-navigation/native';
+import { horizontalScale, moderateScale, verticalScale } from '../utils/Responsive';
 
 const ImagePath = require('../assets/images/payment.png');
 
@@ -12,7 +13,9 @@ export default function VisitedUsersScreen() {
   const dispatch = useDispatch();
   const [userData, setUserData] = useState(null);
 
-  const visitorsdata = useSelector(state => state?.visitor?.visitorsData || []);
+  const visitorsdata = useSelector(state =>
+    Array.isArray(state?.visitor?.visitorsData) ? state.visitor.visitorsData : []
+  );
 
   const visitors = visitorsdata.map(item => item);
 
@@ -82,37 +85,37 @@ const styles = StyleSheet.create({
   },
   wrapContainer: {
     flexDirection: 'row',
-    paddingVertical: 8,
-    paddingHorizontal: 15,
+    paddingVertical: verticalScale(8),
+    paddingHorizontal: horizontalScale(15),
     // borderBottomWidth: 1,
     // borderBottomColor: '#ddd',
   },
   topContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: verticalScale(10),
   },
   logoImage: {
-    width: 40,
-    height: 40,
+    width: horizontalScale(40),
+    height: verticalScale(40),
   },
   titleContainer: {
-    marginLeft: 10,
+    marginLeft: horizontalScale(10),
   },
   titleStyle: {
-    fontSize: 18,
+    fontSize: moderateScale(18),
     fontWeight: 'bold',
     color: lightTheme.facebookColor,
     textTransform: 'capitalize',
   },
   infoStyle: {
-    fontSize: 16,
+    fontSize: moderateScale(16),
     fontWeight: 'bold',
     color: lightTheme.textColor,
-    marginTop: 5,
-    paddingLeft: 5,
+    marginTop: verticalScale(5),
+    paddingLeft: horizontalScale(5),
   },
   contentContainer: {
-    paddingBottom: 20,
+    paddingBottom: verticalScale(20),
   },
 });

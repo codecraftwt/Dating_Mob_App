@@ -12,6 +12,7 @@ import BackButton from '../components/Common/BackButton';
 import {lightTheme} from '../assets/themes';
 import { Image } from 'react-native-elements';
 import RoundButton from '../components/Common/RoundButton';
+import { horizontalScale, moderateScale, verticalScale } from '../utils/Responsive';
 
 const ImagePath = require('../assets/images/gender.png');
 const girl = require('../assets/images/new-girl.jpg');
@@ -72,9 +73,9 @@ export default Matched;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingLeft: 35,
-    paddingRight: 35,
-    fontSize: 16,
+    paddingLeft: horizontalScale(35),
+    paddingRight: horizontalScale(35),
+    fontSize: moderateScale(16),
     backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
@@ -87,33 +88,35 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginTop: 20,
+    paddingLeft: horizontalScale(10),
+    paddingRight: horizontalScale(10),
+    marginTop: verticalScale(20),
     // marginBottom: 20,
   },
   bottomContainer: {
     flex: 1,
     alignItems: 'flex-start',
     flexDirection: 'row',
-    paddingTop:15,
+    paddingTop:verticalScale(10),
   },
   backContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingLeft: 20,
+    paddingLeft: horizontalScale(20),
   },
   inputLabel: {
-    minWidth: 230,
-    paddingTop: 20,
-    minHeight: 60,
-    marginTop: 40,
-    borderRadius: 50,
-    marginBottom: 30,
+    minWidth: horizontalScale(230),
+    paddingTop: verticalScale(20),
+    minHeight: verticalScale(60),
+    marginTop: verticalScale(40),
+    borderRadius: moderateScale(50),
+    marginBottom: verticalScale(30),
   },
   childContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
+    alignContent:'center',
+    alignSelf:'center'
   },
   leftContainer: {
     flex: 0,
@@ -122,13 +125,13 @@ const styles = StyleSheet.create({
   rightContainer: {
     flex: 3,
     justifyContent: 'center',
-    paddingTop: 17,
-    paddingLeft: 5,
+    paddingTop: verticalScale(17),
+    paddingLeft: horizontalScale(5),
   },
   forgotPassword: {
-    marginTop: 10,
-    marginBottom: 15,
-    fontSize: 16,
+    marginTop: verticalScale(7),
+    marginBottom: verticalScale(2),
+    fontSize: moderateScale(16),
     alignSelf: 'flex-start',
     alignContent: 'flex-start',
     alignItems: 'flex-start',
@@ -136,66 +139,65 @@ const styles = StyleSheet.create({
   leftMatchContainer: {
     backgroundColor: 'rgba(255, 255, 255, 0.3)',
     position: 'relative',
-    left: 15,
+    left: horizontalScale(15),
   },
   title: {
-    marginTop: 10,
-    marginBottom: 100,
-    borderWidth: 1,
+    marginTop: verticalScale(10),
+    marginBottom: verticalScale(100),
+    borderWidth: moderateScale(1),
   },
   iconContainer: {
-    minWidth: 190,
-    height: 190,
-    borderRadius: 150,
+    minWidth: horizontalScale(150),
+    height: verticalScale(190),
+    borderRadius: moderateScale(150),
   },
   Icon: {
-    fontSize: 25,
-    padding: 15,
+    fontSize: moderateScale(25),
+    padding: horizontalScale(15),
     justifyContent: 'center',
   },
   backIcon: {
-    fontSize: 25,
-    paddingTop: 20,
-    paddingLeft: 25,
+    fontSize: moderateScale(25),
+    paddingTop: verticalScale(20),
+    paddingLeft: horizontalScale(25),
   },
   logoImage: {
     justifyContent: 'center',
-    width: 130,
-    height: 130,
-    margin: 32,
-    borderRadius: 130,
+    width: horizontalScale(110),
+    height: verticalScale(130),
+    margin: moderateScale(25),
+    borderRadius: moderateScale(130),
   },
   textStyle: {
-    fontSize: 16,
+    fontSize: moderateScale(16),
     fontWeight: 'bold',
   },
   rightMatchContainer: {
     backgroundColor: 'rgba(255, 255, 255, 0.3)',
     position: 'relative',
-    right: 15,
+    right: horizontalScale(15),
   },
   nexStyle: {
-    marginTop: 20,
-    // marginBottom: 30,
+    marginTop: verticalScale(20),
   },
   specialText: {
-    fontSize: 24,
+    fontSize: moderateScale(24),
     color:lightTheme.highlightTextColor,
     textTransform: "uppercase"
   },
   imageStyle: {
     width: '100%',
-    height: 380,
+    height: verticalScale(380),
   },
   bottomContent: {
     flex: 1,
     justifyContent: 'flex-start',
   },
   messageContent: {
-    width: 180,
+    width: horizontalScale(180),
     fontWeight: 'bold',
     textAlign: 'center',
-    paddingBottom: 10,
+    paddingBottom: verticalScale(10),
     color:lightTheme.highlightTextColor
   },
 });

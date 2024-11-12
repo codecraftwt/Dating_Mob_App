@@ -7,15 +7,17 @@ import {
   View,
 } from 'react-native';
 import {useEffect, useState} from 'react';
-import Icon from 'react-native-vector-icons/Ionicons';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import {StyleSheet} from 'react-native';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {lightTheme} from '../../assets/themes';
 import Chips from '../../components/Common/Chip';
 import {useDispatch} from 'react-redux';
 import {setFields} from '../../Redux/slices/UserRegisterSlice';
 import BackButton from '../../components/Common/BackButton';
+import {
+  horizontalScale,
+  moderateScale,
+  verticalScale,
+} from '../../utils/Responsive';
 
 const {height, width} = Dimensions.get('window');
 
@@ -29,7 +31,7 @@ const GenderScreen = ({navigation}) => {
     if (selectedGender) {
       const formData = {
         gender: selectedGender,
-        profileFor:selectedChip
+        profileFor: selectedChip,
       };
       dispatch(setFields(formData));
       console.log(formData, 'formData'); // Log updated formData here
@@ -64,7 +66,7 @@ const GenderScreen = ({navigation}) => {
         source={require('../../assets/images/profile.png')}
         style={styles.imageStyle}
         resizeMode="cover">
-        <BackButton navigation={navigation}/>
+        <BackButton navigation={navigation} />
         <View style={styles.childContainer}>
           <Text style={[styles.forgotPassword, {color: '#000'}]}>
             This Profile is for
@@ -152,9 +154,8 @@ const styles = StyleSheet.create({
   },
   imageStyle: {
     width: '100%',
-    height: 300,
+    height: verticalScale(375),
   },
-
   childContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -163,7 +164,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 8,
+    margin: moderateScale(8),
     width: '100%',
   },
   bottomContainer: {
@@ -174,56 +175,56 @@ const styles = StyleSheet.create({
   bottomContent: {
     flex: 1,
     justifyContent: 'flex-end',
-    marginTop: 50,
+    marginTop: verticalScale(50),
   },
   iconContainer: {
-    margin: 12,
-    minWidth: 80,
-    height: 80,
-    borderRadius: 50,
-    padding: 15,
+    margin: moderateScale(12),
+    minWidth: horizontalScale(80),
+    height: verticalScale(100),
+    borderRadius: moderateScale(50),
+    padding: moderateScale(15),
   },
   genderStyle: {
-    fontSize: 18,
+    fontSize: moderateScale(18),
     fontWeight: 'bold',
     alignSelf: 'center',
-    marginTop: 10,
+    marginTop: verticalScale(10),
   },
   container: {
     flexDirection: 'row',
-    padding: 10,
+    padding: moderateScale(10),
     justifyContent: 'center',
-    borderRadius: 20,
-    minWidth: 30,
-    height: 45,
+    borderRadius: moderateScale(20),
+    minWidth: horizontalScale(30),
+    height: verticalScale(45),
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: verticalScale(10),
+    marginBottom: verticalScale(10),
     textAlign: 'center',
   },
   inputLabel: {
-    minWidth: 230,
-    paddingTop: 20,
-    minHeight: 60,
-    borderRadius: 50,
-    marginBottom: 30,
+    minWidth: horizontalScale(230),
+    paddingTop: verticalScale(20),
+    minHeight: verticalScale(60),
+    borderRadius: moderateScale(50),
+    marginBottom: verticalScale(30),
   },
   userNameStyle: {
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: moderateScale(16),
   },
   rightContainer: {
     flex: 3,
     justifyContent: 'center',
-    paddingTop: 17,
-    paddingLeft: 5,
+    paddingTop: verticalScale(17),
+    paddingLeft: horizontalScale(5),
   },
   forgotPassword: {
-    marginTop: 10,
-    marginBottom: 15,
+    marginTop: verticalScale(10),
+    marginBottom: verticalScale(15),
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: moderateScale(18),
     alignSelf: 'flex-start',
     alignContent: 'flex-start',
     alignItems: 'flex-start',

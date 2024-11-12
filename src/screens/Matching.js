@@ -13,6 +13,7 @@ import {Image} from 'react-native-elements';
 import {lightTheme} from '../assets/themes';
 import {useDispatch, useSelector} from 'react-redux';
 import {matchedInfo} from '../Redux/slices/VisitorSlice';
+import { horizontalScale, moderateScale, verticalScale } from '../utils/Responsive';
 
 const ImagePath = require('../assets/images/payment.png');
 const cross = require('../assets/images/cross.png');
@@ -122,52 +123,52 @@ const styles = StyleSheet.create({
   topContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 10,
+    paddingTop: verticalScale(10),
   },
   textStyle: {
-    fontSize: 16,
+    fontSize: moderateScale(16),
     fontWeight: 'bold',
   },
   titleStyle: {
-    fontSize: 32,
+    fontSize: moderateScale(32),
     textTransform: 'capitalize',
     color: lightTheme.highlightTextColor,
   },
   contentContainer: {
     flex: 1,
     justifyContent: 'center',
-    marginTop: -20,
+    marginTop: verticalScale(-20),
   },
   card: {
-    borderRadius: 40,
-    borderWidth: 2,
+    borderRadius: moderateScale(40),
+    borderWidth: moderateScale(2),
     borderColor: '#E8E8E8',
     justifyContent: 'center',
     alignSelf: 'center',
     backgroundColor: 'white',
     width: '80%',
-    height: 350,
+    height: verticalScale(350),
   },
   text: {
     textAlign: 'center',
-    fontSize: 32,
+    fontSize: moderateScale(32),
     fontWeight: 'bold',
-    marginTop: 5,
+    marginTop: verticalScale(5),
   },
   logoImage: {
-    width: 60,
-    height: 60,
+    width: horizontalScale(55),
+    height: verticalScale(72),
   },
   specialStyle: {
-    width: 40,
-    height: 40,
-    marginTop: 10,
+    width: horizontalScale(43),
+    height: verticalScale(55),
+    marginTop: verticalScale(10),
   },
   iconContainer: {
-    margin: 14,
-    minWidth: 50,
-    height: 50,
-    borderRadius: 50,
+    margin: horizontalScale(14),
+    minWidth: horizontalScale(50),
+    height: verticalScale(50),
+    borderRadius: moderateScale(50),
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -181,29 +182,29 @@ const styles = StyleSheet.create({
   },
   imageCard: {
     width: '100%',
-    height: 250,
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
+    height: verticalScale(250),
+    borderTopLeftRadius: moderateScale(40),
+    borderTopRightRadius: moderateScale(40),
   },
   Icon: {
     justifyContent: 'center',
   },
   cardIcon: {
     backgroundColor: '#fc5660',
-    width: 37,
-    height: 23,
-    borderRadius: 20,
-    marginTop: 5,
-    paddingTop: 3,
-    paddingLeft: 10,
+    width: horizontalScale(37),
+    height: verticalScale(23),
+    borderRadius: moderateScale(20),
+    marginTop: verticalScale(5),
+    paddingTop: verticalScale(3),
+    paddingLeft: horizontalScale(10),
   },
   cardContent: {
     backgroundColor: '#fc5660',
-    width: 67,
-    height: 23,
-    borderRadius: 20,
-    marginTop: 5,
+    width: horizontalScale(67),
+    height: verticalScale(23),
+    borderRadius: moderateScale(20),
+    marginTop: verticalScale(5),
     paddingTop: Platform.OS === 'ios' ? 3 : 1,
-    marginLeft: 10,
+    marginLeft: horizontalScale(10),
   },
 });

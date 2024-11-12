@@ -10,6 +10,11 @@ import React from 'react';
 import BackButton from '../components/Common/BackButton';
 import {Image} from 'react-native-elements';
 import UserItems from '../components/Common/UserItems';
+import {
+  horizontalScale,
+  moderateScale,
+  verticalScale,
+} from '../utils/Responsive';
 
 const ImagePath = require('../assets/images/rectangle-3.png');
 const search = require('../assets/images/search.png');
@@ -99,53 +104,53 @@ const styles = StyleSheet.create({
   },
   rightContainer: {
     flex: 0,
-    paddingRight: 20,
-    paddingTop: 20,
+    paddingRight: horizontalScale(25),
+    paddingTop: verticalScale(27),
   },
   centerContainer: {
     flex: 3,
     justifyContent: 'center',
-    paddingTop: 10,
+    paddingTop: verticalScale(10),
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   backContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingTop: 20,
+    paddingTop: verticalScale(20),
   },
   extraStyle: {
     flex: 1,
     alignItems: 'flex-end',
   },
   backIcon: {
-    fontSize: 25,
-    paddingTop: 20,
-    paddingLeft: 20,
+    fontSize: moderateScale(25),
+    paddingTop: verticalScale(20),
+    paddingLeft: horizontalScale(20),
   },
   imageStyle: {
     width: '100%',
-    height: 130,
+    height: verticalScale(150),
   },
   searchStyle: {
     justifyContent: 'center',
-    width: 20,
-    height: 20,
+    width: horizontalScale(15),
+    height: verticalScale(20),
   },
   addStyle: {
     justifyContent: 'center',
-    width: 40,
-    height: 40,
+    width: horizontalScale(30),
+    height: verticalScale(38),
   },
   textStyle: {
-    fontSize: 24,
-    paddingTop: 10,
+    fontSize: moderateScale(24),
+    paddingTop: verticalScale(10),
   },
   leftStyle: {
-    fontSize: 20,
+    fontSize: moderateScale(20),
     textAlign: 'left',
-    paddingTop: 20,
-    paddingRight: 30,
+    paddingTop: verticalScale(20),
+    paddingRight: horizontalScale(30),
     fontWeight: 'bold',
   },
 });

@@ -9,6 +9,7 @@ import React from 'react';
 import BackButton from '../components/Common/BackButton';
 import {Image} from 'react-native-elements';
 import {lightTheme} from '../assets/themes';
+import { horizontalScale, moderateScale, verticalScale } from '../utils/Responsive';
 
 const ImagePath = require('../assets/images/payment.png');
 const search = require('../assets/images/search.png');
@@ -38,7 +39,7 @@ const Nearby = ({navigation}) => {
         </View>
         <ScrollView>
           <View style={styles.childContainer}>
-            <View style={[styles.leftContainer, {paddingRight: 10}]}>
+            <View style={[styles.leftContainer, {paddingRight: 5,paddingLeft:10}]}>
               <View
                 style={[
                   styles.container,
@@ -56,7 +57,7 @@ const Nearby = ({navigation}) => {
             <View
               style={[
                 styles.rightContainer,
-                {paddingRight: 0, paddingLeft: 10},
+                {paddingRight: 10, paddingLeft: 5},
               ]}>
               <View
                 style={[
@@ -74,7 +75,7 @@ const Nearby = ({navigation}) => {
             </View>
           </View>
           <View style={styles.childContainer}>
-            <View style={[styles.leftContainer, {paddingRight: 10}]}>
+            <View style={[styles.leftContainer, {paddingRight: 5,paddingLeft:10}]}>
               <View
                 style={[
                   styles.container,
@@ -92,7 +93,7 @@ const Nearby = ({navigation}) => {
             <View
               style={[
                 styles.rightContainer,
-                {paddingRight: 0, paddingLeft: 10},
+                {paddingRight: 10, paddingLeft: 5},
               ]}>
               <View
                 style={[
@@ -119,11 +120,11 @@ export default Nearby;
 
 const styles = StyleSheet.create({
   container: {
-    fontSize: 16,
+    fontSize: moderateScale(16),
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    borderRadius: 20,
-    marginTop: 40,
+    borderRadius: moderateScale(20),
+    marginTop: verticalScale(40),
   },
   mainContainer: {
     flex: 1,
@@ -136,25 +137,27 @@ const styles = StyleSheet.create({
   rightContainer: {
     flex: 0,
     justifyContent: 'flex-end',
-    paddingRight: 20,
+    paddingRight: horizontalScale(20),
   },
   centerContainer: {
     flex: 3,
     justifyContent: 'center',
-    paddingTop: 20,
+    paddingTop: verticalScale(10),
+    paddingHorizontal:2
   },
   backContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   backIcon: {
-    fontSize: 25,
-    paddingTop: 20,
-    paddingLeft: 20,
+    fontSize: moderateScale(25),
+    paddingTop: verticalScale(20),
+    paddingLeft: horizontalScale(20),
   },
   childContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
+    paddingHorizontal:2
   },
   imageStyle: {
     flex: 1,
@@ -164,46 +167,46 @@ const styles = StyleSheet.create({
   },
   searchStyle: {
     justifyContent: 'center',
-    width: 20,
-    height: 20,
+    width: horizontalScale(20),
+    height: verticalScale(20),
   },
   textStyle: {
-    fontSize: 24,
+    fontSize: moderateScale(24),
     fontWeight: 'bold',
     textAlign: 'center',
     alignSelf: 'center',
-    paddingTop: 10,
+    paddingTop: verticalScale(10),
   },
   smallStyle: {
-    fontSize: 14,
+    fontSize: moderateScale(14),
     textAlign: 'center',
     alignSelf: 'center',
-    paddingBottom: 15,
+    paddingBottom: verticalScale(15),
   },
   leftStyle: {
-    fontSize: 20,
+    fontSize: moderateScale(20),
     textAlign: 'left',
-    paddingRight: 10,
+    paddingRight: horizontalScale(10),
     fontWeight: 'bold',
   },
   rightStyle: {
-    fontSize: 20,
+    fontSize: moderateScale(20),
     textAlign: 'right',
     textDecorationLine: 'underline',
     fontWeight: 'bold',
-    paddingLeft: 10,
+    paddingLeft: horizontalScale(10),
   },
   extraStyle: {
-    marginLeft: 30,
-    marginRight: 30,
-    borderRadius: 40,
-    paddingBottom: 40,
-    height: 200,
+    marginLeft: horizontalScale(30),
+    marginRight: horizontalScale(30),
+    borderRadius: moderateScale(40),
+    paddingBottom: verticalScale(40),
+    height: verticalScale(200),
   },
   profileStyle: {
-    width: 180,
-    height: 220,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    width: horizontalScale(180),
+    height: verticalScale(220),
+    borderTopLeftRadius: moderateScale(20),
+    borderTopRightRadius: moderateScale(20),
   },
 });
