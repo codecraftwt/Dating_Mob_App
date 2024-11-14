@@ -18,6 +18,7 @@ import Calling from '../screens/Calling';
 import RecentVisitors from '../screens/RecentVisitors';
 import Matching from '../screens/Matching';
 import Matched from '../screens/Matched';
+import Chat from '../screens/Chat';
 
 const Stack = createNativeStackNavigator();
 
@@ -208,6 +209,18 @@ const stackArray = [
     component: props => (
       // <ComponentWrapper>
       <Matched {...props} />
+      // </ComponentWrapper>
+    ),
+    headerProps: {
+      title: 'pro',
+      showBack: false,
+    },
+  },
+  {
+    name: 'Chat',
+    component: props => (
+      // <ComponentWrapper>
+      <Chat {...props} />
       // </ComponentWrapper>
     ),
     headerProps: {

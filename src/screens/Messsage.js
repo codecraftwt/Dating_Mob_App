@@ -49,43 +49,57 @@ const Messsage = ({navigation}) => {
             </TouchableOpacity>
           </View>
         </View>
-        <UserItems
-          image={user1}
-          title="John Rhoades"
-          content="Hey How are you ?"
-        />
-        <UserItems
-          image={user2}
-          title="ds Chiogna"
-          content="Yeah, it’s been great! Are you enjoying it too?"
-          notificationCount={1}
-        />
-        <UserItems
-          image={user3}
-          title="D Afzal-khan"
-          content="love this song – do you like this kind of music?"
-        />
-        <UserItems
-          image={user4}
-          title="L Seheult"
-          content="I loved visiting New York. Are there things you.."
-          notificationCount={6}
-        />
-        <UserItems
-          image={user5}
-          title="F Casteris"
-          content="So, what do you do for a living? ..."
-        />
-        <UserItems
-          image={user6}
-          title="Michal Franci"
-          content="These are great! I absolutely hate small talk, but "
-        />
-        <UserItems
-          image={user7}
-          title="Moore Torff"
-          content="do you like this kind of music? "
-        />
+        <TouchableOpacity onPress={() => navigation.navigate('Chat')}>
+          <UserItems
+            image={user1}
+            title="John Rhoades"
+            content="Hey How are you ?"
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Chat')}>
+          <UserItems
+            image={user2}
+            title="ds Chiogna"
+            content="Yeah, it’s been great! Are you enjoying it too?"
+            notificationCount={1}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Chat')}>
+          <UserItems
+            image={user3}
+            title="D Afzal-khan"
+            content="love this song – do you like this kind of music?"
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Chat')}>
+          <UserItems
+            image={user4}
+            title="L Seheult"
+            content="I loved visiting New York. Are there things you.."
+            notificationCount={6}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Chat')}>
+          <UserItems
+            image={user5}
+            title="F Casteris"
+            content="So, what do you do for a living? ..."
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Chat')}>
+          <UserItems
+            image={user6}
+            title="Michal Franci"
+            content="These are great! I absolutely hate small talk, but "
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Chat')}>
+          <UserItems
+            image={user7}
+            title="Moore Torff"
+            content="do you like this kind of music? "
+          />
+        </TouchableOpacity>
       </ScrollView>
     </View>
   );
