@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import BackButton from '../components/Common/BackButton';
 import {Image} from 'react-native-elements';
 import UserItems from '../components/Common/UserItems';
@@ -15,6 +15,7 @@ import {
   moderateScale,
   verticalScale,
 } from '../utils/Responsive';
+import {socket} from '../utils/Socket';
 
 const ImagePath = require('../assets/images/rectangle-3.png');
 const search = require('../assets/images/search.png');
@@ -28,6 +29,13 @@ const user6 = require('../assets/images/new-profile2.jpg');
 const user7 = require('../assets/images/searching.jpg');
 
 const Messsage = ({navigation}) => {
+  const [allChatRooms, setAllChatRooms] = useState([]);
+
+  useEffect(() => {
+    socket.emit('getAllGroups');
+
+    socket.on('groupList', groups => {});
+  }, [socket]);
   return (
     <View style={styles.mainContainer}>
       <ImageBackground source={ImagePath} style={styles.imageStyle}>
