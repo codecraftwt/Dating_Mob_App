@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "101531147191",
+    "project_id": "dating-app-walstar",
+    "storage_bucket": "dating-app-walstar.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:101531147191:android:12a99c1fc34daff5636632",
+        "android_client_info": {
+          "package_name": "com.datingappwalstar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVocuiXb4kXUJBWhVjGd91rh_x_XRUJH8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
