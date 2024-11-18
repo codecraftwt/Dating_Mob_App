@@ -1,3 +1,4 @@
+import React, {useEffect} from 'react';
 import {
   Dimensions,
   ImageBackground,
@@ -5,8 +6,8 @@ import {
   TouchableOpacity,
   View,
   Image,
+  StyleSheet,
 } from 'react-native';
-import {StyleSheet} from 'react-native';
 import RoundButton from '../../components/Common/RoundButton';
 import {lightTheme} from '../../assets/themes';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -16,10 +17,52 @@ import {
   moderateScale,
   verticalScale,
 } from '../../utils/Responsive';
+import {
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth'; // If using Firebase for authentication
+import {useNavigation} from '@react-navigation/native';
 
 const {height, width} = Dimensions.get('window');
 
-const ForgetPassword = ({navigation}) => {
+const ForgetPassword = () => {
+  const WEB_CLIIENT_ID =
+    '809433838577-f3dtkftpj04qe12b7im6o92r4nff72nl.apps.googleusercontent.com';
+  GoogleSignin.configure({
+    webClientId: WEB_CLIIENT_ID,
+  });
+  const signInWithGoogle = async () => {
+    console.log('signIn Button pressed');
+    try {
+      await GoogleSignin.hasPlayServices();
+      console.log('hello');
+      const userInfo = await GoogleSignin.signIn();
+      console.log('hello');
+      const {idToken} = userInfo.data;
+
+      console.log(idToken, 'idToken');
+      // dispatch(signIn(idToken)).then(action => {
+      //   console.log(action.payload)
+      //   if (action.payload.user) {
+      //     if(!action.payload.user.nickName){
+      //       navigation.navigate('Nikname')
+      //     }else if(!action.payload.user.gender){
+      //       navigation.navigate('Gender')
+      //     }else if(!action.payload.user.dob){
+      //       navigation.navigate('Birthdate')
+      //     }else{
+      //       navigation.navigate('BottomNavigation', { screen: 'Chats' } );
+      //     }
+      //   }
+      // });
+      navigation.navigate('bottomtabbar');
+    } catch (error) {
+      console.error('Google Sign-In Error:', error);
+    }
+  };
+  const navigation = useNavigation();
+
   return (
     <>
       <View style={styles.mainContainer}>
@@ -37,9 +80,7 @@ const ForgetPassword = ({navigation}) => {
             </View>
           </View>
           <View style={[styles.topContainer, styles.nexStyle]}>
-            <Text
-              styleKey="highlightTextColor"
-              style={[styles.textStyle, styles.specialText]}>
+            <Text style={[styles.textStyle, styles.specialText]}>
               Forget Password
             </Text>
           </View>
@@ -57,9 +98,7 @@ const ForgetPassword = ({navigation}) => {
               labelStyle={lightTheme.appColor}
             />
             <View style={styles.childContainer}>
-              <Text style={styles.forgotPassword} styleKey="highlightTextColor">
-                {'or Create New Account'}
-              </Text>
+              <Text style={styles.forgotPassword}>or Create New Account</Text>
             </View>
           </View>
         </ImageBackground>
@@ -84,12 +123,14 @@ const ForgetPassword = ({navigation}) => {
                 styles.iconContainer,
                 {backgroundColor: lightTheme.googleColor},
               ]}>
-              <Icon
-                name="google"
-                size={30}
-                color={lightTheme.highlightTextColor}
-                style={styles.Icon}
-              />
+              <TouchableOpacity onPress={signInWithGoogle}>
+                <Icon
+                  name="google"
+                  size={30}
+                  color={lightTheme.highlightTextColor}
+                  style={styles.Icon}
+                />
+              </TouchableOpacity>
             </View>
             <View
               style={[
@@ -147,11 +188,6 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(16),
     fontWeight: 'bold',
   },
-  textStyle2: {
-    fontSize: moderateScale(16),
-    fontWeight: 'bold',
-    color: lightTheme.highlightTextColor,
-  },
   specialText: {
     fontSize: moderateScale(32),
     textTransform: 'capitalize',
@@ -160,14 +196,6 @@ const styles = StyleSheet.create({
   nexStyle: {
     marginTop: 0,
     marginBottom: verticalScale(30),
-  },
-  button: {
-    backgroundColor: '#FF0000',
-    padding: moderateScale(8),
-    borderRadius: moderateScale(20),
-    alignItems: 'center',
-    marginVertical: verticalScale(10),
-    minWidth: moderateScale(200),
   },
   buttonContainer: {
     width: '100%',
@@ -187,8 +215,6 @@ const styles = StyleSheet.create({
     marginBottom: verticalScale(15),
     fontSize: moderateScale(16),
     alignSelf: 'flex-start',
-    alignContent: 'flex-start',
-    alignItems: 'flex-start',
   },
   bottomContainer: {
     flex: 1,
