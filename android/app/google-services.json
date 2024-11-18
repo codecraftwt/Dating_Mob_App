@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "809433838577",
+    "project_id": "dating-app-ws",
+    "storage_bucket": "dating-app-ws.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:809433838577:android:556236cefbcf9236930a50",
+        "android_client_info": {
+          "package_name": "com.datingapptech"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "809433838577-tvo8cva04bjegvdltn3ht3l77io31f3m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.datingapptech",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "809433838577-f3dtkftpj04qe12b7im6o92r4nff72nl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTr3OfwErJRKZqOw_hBC611MaSmdYUghs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "809433838577-f3dtkftpj04qe12b7im6o92r4nff72nl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
